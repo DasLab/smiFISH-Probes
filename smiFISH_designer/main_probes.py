@@ -11,26 +11,34 @@ MBP_seq = 'AAAGACAGGCCCTCAGAGTCCGACGAGCTTCTCAGAGTCCGACGAGCTTCAGACCATCCAAGAAGATCC
 
 def main():
 
+	# List of 5 PNAS rules for optimum probe performance
 	filters = ['pnas1', 'pnas2', 'pnas3', 'pnas4', 'pnas5']
+
+	# Flip the inputed target RNA and replace bases to create complement strand
 	reverse = MBP_seq[::-1]
 	comp = MBP_seq.lower()[::-1].replace("g", "C").replace("c", "G").replace("t", "A").replace("a", "T").replace("u", "A")
 
+	# Split complement strand (comp) into all possible probes between range (ex. 20-30 bases long)
 	split_probes = []
 	for n in range(20, 31): 
 		for i in range(0, len(comp), n):
 			probe = comp[i:i + n]
+
+			# If length of probe is shorter than minimum range, remove from list
 			if len(probe) > 20:
 				split_probes.append(probe)
 
 
+	# Main DataFrame
 	df = pd.DataFrame()
 
+	# Inputed names/sequences for FLAP and target RNA
 	target_name = 'MBP'
 	FLAP_name = 'X'
 	FLAP_sequence = 'CCTCCTAAGTTTCGAGCTGGACTCAGTG'
 	final_sequence = [FLAP_sequence + probe for probe in split_probes]
 
-	
+	# Adding columns to main DataFrame (boolean --> integers)
 	df['probe_sequence'] = split_probes
 	df['probe_length'] = df['probe_sequence'].apply(len)
 	df['start'] = df['probe_sequence'].apply(quantitative_filters.start_index, comp=comp)
@@ -48,6 +56,7 @@ def main():
 	df['FLAP_sequence'] = FLAP_sequence
 	df['final_sequence'] = final_sequence
 
+	# Create DataFrame using filters found in overlap_filters file
 	fdf = overlap_filters.iteratively_find_probe_set(df, filters)
 
 	# Final sequence name (target name + FLAP name + ranking number)
@@ -55,29 +64,14 @@ def main():
 	fdf_index = fdf_index_reset.index.map(str)
 	final_sequence_name = (target_name + '-' + FLAP_name + '-' + fdf_index)
 
+	# Output of final, filtered DataFrame
 	fdf['final_sequence_name'] = final_sequence_name
 	print(fdf)
 
+	# Output excel for all columns of final DataFrame
 	fdf.to_excel('draft_probes_output.xlsx')
 
 
 
 if __name__ == "__main__":
 	main()
-
-
-
-"""
-MAYBE how to choose probes
-
-For now, forget about filters
-1. Choose the median delta G probe
-2. Choose the next nearest non-verlapping probe
-3. Continue until we run out of probes
-
-With filters:
-1. Start with all filters on
-2. Begin the above process. If you run out of probes before you reach minimum probe number...
-3. Remove the least stringent filter first. Repeat.
-
-"""

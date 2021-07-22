@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Calculate deltaG
+# Calculate deltaG using Nearest-Neighbor Parameters
 def deltaG1(probe_sequence):
 	table = {"AA":0.2, "AC":-1.4, "AG":-0.4, "AT":-0.4,
 	"CA":-1.6, "CC":-2.3, "CG":-1.4, "CT":-1.3,
@@ -8,9 +8,12 @@ def deltaG1(probe_sequence):
 	"TA":-0.5, "TC":-1.5, "TG":-1.2, "TT":-0.7}
 
 	for p in range(len(probe_sequence)):
+		# Add deltaG of pairing, then next pairing including the last base-pair (ex. ACGA = AC, CG, GA)
 		list_of_pairs = [probe_sequence[p:2 + p] for p in range(0, len(probe_sequence))]
+		# Delete last element of list, not a paired base
 		list_of_pairs.pop()
 		if len(list_of_pairs) > 0:
+			# Make a series using the dictonary of calculated deltaG's
 			C = pd.Series(list_of_pairs).map(table)
 			D = list(C)
 			return sum(D)

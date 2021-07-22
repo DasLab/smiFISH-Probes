@@ -14,7 +14,7 @@ def pnas_filter_2(probe_sequence):
 # PNAS 3: Enforce C composition of between 22-28%
 def pnas_filter_3(probe_sequence):
 	percent_c = probe_sequence.count('C')/len(probe_sequence)
-	return 0.22 < percent_c and 0.28 > percent_c
+	return 0.22 < percent_c < 0.28
 
 # PNAS 4: No CCCC stacks in any 6 consecutive nucleotides in the first 12 positions
 def pnas_filter_4(probe_sequence):
