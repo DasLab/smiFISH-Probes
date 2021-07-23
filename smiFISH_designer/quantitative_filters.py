@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # Calculate deltaG using Nearest-Neighbor Parameters
 def deltaG1(probe_sequence):
@@ -47,3 +48,16 @@ def end_index(probe_sequence, comp):
 		return end
 
 	return 'Error'
+
+# Well position for ordering .xlsx
+def well_position_list(n):
+    well_y = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    newrow = [[i+str(j) for j in range(1,13)] for i in well_y]
+    well_name = [j for i in newrow for j in i]
+    well_name_array = np.array(well_name)
+    
+    well_names_output = []
+    for p in range(n):
+        well_names_output.append(well_name_array[p % len(well_name_array)])
+
+    return well_names_output
