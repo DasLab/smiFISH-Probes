@@ -33,6 +33,7 @@ def find_nonoverlapping_probes_around_median(df):
 
     # Iteratively build list of non-overlapping probes around the median
     final_probe_list = [df.iloc[result_index[0]]]
+    # Probe vs. all other probe_candidates based on ranking
     for index in result_index[1:]:
         probe_candidate = df.iloc[index]
         if check_probe_fits(probe_candidate, final_probe_list):
@@ -45,7 +46,7 @@ def find_nonoverlapping_probes_around_median(df):
 def filter_df(df, filters):
     return df[df[filters].all(True)]
 
-# NOTE: Requiers 
+# 
 def iteratively_find_probe_set(df, filters):
     
 	filtered_out_counts = {}
