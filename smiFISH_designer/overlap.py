@@ -42,37 +42,36 @@ def find_nonoverlapping_probes_around_median(df):
     return pd.DataFrame(final_probe_list)
 
 
+
 # Given dataframe and filters, return filtered dataframes
 def filter_df(df, filters):
     return df[df[filters].all(True)]
 
-# 
-def iteratively_find_probe_set(df, filters):
+# NOTE: Requiers 
+def iteratively_find_probe_set(df, filters, gc_filter):
     
-	filtered_out_counts = {}
-    # Calculate the stringency of each PNAS filter based on the target RNA
-	for f in filters:
-		filtered_out_count = len(df) - df[f].sum()
-		filtered_out_counts[f] = filtered_out_count
+    filtered_out_counts = {}
 
-    # Sort by least stringent filter and print out new list
-	ordered_filters = sorted(filtered_out_counts, key=filtered_out_counts.get, reverse=False)
+    for f in filters:
+        filtered_out_count = len(df) - df[f].sum()
+        filtered_out_counts[f] = filtered_out_count
+
+    ordered_filters = sorted(filtered_out_counts, key=filtered_out_counts.get, reverse=False)
     
-    # 
-	median_and_filters = find_nonoverlapping_probes_around_median(filter_df(df, filters))
-
-    # If there is less than minimum probes wanted, remove least stringent PNAS filter and re-order DataFrame based on median deltaG
-	while len(median_and_filters) < 20:
-		ordered_filters.pop(0)
-		filtered_filters_df = filter_df(df, ordered_filters)
-		median_and_filters = find_nonoverlapping_probes_around_median(filter_df(df, ordered_filters))
-
-        # If there is the minimum number of probes wanted and more, return number of probes created and PNAS filters used 
-		if len(median_and_filters) >= 20:
-			break
+    gc_filter_on = df[df[gc_filter].all(True)]
     
-	if len(median_and_filters) >= 20:
-		print('Found {} probes using filters {}'.format(len(median_and_filters), ' '.join(ordered_filters)))
-		return median_and_filters
-	else:
-		raise ValueError('Not enough probes even with all filters off')
+    median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, filters))
+
+    while len(median_and_filters) < 20:
+        ordered_filters.pop(0)
+        filtered_filters_df = filter_df(gc_filter_on, ordered_filters)
+        median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, ordered_filters))
+        
+        if len(median_and_filters) >= 20:
+            break
+    
+    if len(median_and_filters) >= 20:
+        print('Found {} probes using filters {}'.format(len(median_and_filters), ' '.join(ordered_filters)))
+        return median_and_filters
+    else:
+        raise ValueError('Not enough probes even with all filters off')

@@ -1,6 +1,11 @@
 import pandas as pd
 import numpy as np
 
+# Calculate the max probe length (without FLAP sequence)
+def max_probe(FLAP_sequence, acceptable_max):
+	calculate_max_probe = acceptable_max - len(FLAP_sequence)
+	return calculate_max_probe
+
 # Calculate deltaG using Nearest-Neighbor Parameters
 def deltaG1(probe_sequence):
 	table = {"AA":0.2, "AC":-1.4, "AG":-0.4, "AT":-0.4,
