@@ -4,7 +4,7 @@ import pandas as pd
 import click
 
 from filters import pnas_filters, overlap_filters, quantitative_filters
-from utils import read_fasta
+from utils import read_fasta, write_probes_fasta_from_dataframe
  
 @click.command()
 @click.option('--fasta', type=str, required=True, help='Path to fasta file of target RNA sequence')
@@ -13,7 +13,7 @@ from utils import read_fasta
 # @click.STRING('--FLAP_sequence', required=True, help='Name of FLAP sequence')
 
 @click.option('--acceptable_max', type=int, required=False, default=60, help='Maximum length of acceptable probe length. Based on the company you are ordering probes with (with FLAP sequence)')
-@click.option('--probe_min', type=int, required=False, default=25, help='Minimum length of desired probe (without FLAP sequence)')
+@click.option('--probe_min', type=int, required=False, default=26, help='Minimum length of desired probe (without FLAP sequence)')
 @click.option('--probe_max', type=int, required=False, default=32, help='Maximum length of desired probes (without FLAP sequence')
 
 
@@ -50,7 +50,7 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 	target_name = sequence_name
 	FLAP_name = 'X'
 	FLAP_sequence = 'CCTCCTAAGTTTCGAGCTGGACTCAGTG'
-	final_sequence = [FLAP_sequence + probe for probe in split_probes]
+	final_sequence = [probe + FLAP_sequence for probe in split_probes]
 
 	# Adding columns to main DataFrame (boolean --> integers)
 	df['probe_sequence'] = split_probes
@@ -91,11 +91,16 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 	1. all columns of final DataFrame
 	2. Ordering form
 	'''
-	fdf.to_excel(output_file_path + '.xlsx', sheet_name = 'All Data')
-	fdf.to_excel(ordering_output_file_path + '.xlsx', columns=['well_position', 'final_sequence_name'], sheet_name = "Ordering Form")
+	fdf.to_excel(output_file_path + '.xlsx', sheet_name = 'All Data', index=False)
+	fdf.to_excel(ordering_output_file_path + '.xlsx', columns=['well_position', 'final_sequence_name', 'final_sequence'], sheet_name = "Ordering Form", index=False)
 
-	fdf.to_csv(output_file_path + '.csv')
-	fdf.to_csv(ordering_output_file_path + '.csv', columns=['well_position', 'final_sequence_name'])
+	fdf.to_csv(output_file_path + '.csv', index=False)
+	fdf.to_csv(ordering_output_file_path + '.csv', columns=['well_position', 'final_sequence_name', 'final_sequence'], index=False)
+
+	"""
+	Output a fasta file of probes for easy BLASTing
+	"""
+	write_probes_fasta_from_dataframe(fdf, os.path.join(output, sequence_name + '_filtered_probes.fa'))
 
 
 
