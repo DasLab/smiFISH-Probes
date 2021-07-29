@@ -1,24 +1,10 @@
-import sys
 import os
 
 import pandas as pd
 import click
-import numpy as np
-from configparser import ConfigParser
 
-import filters as pnas_filters
-import quantitative_filters as quantitative_filters
-import overlap as overlap_filters
-
-
-def read_fasta(fasta_path):
-
-	with open(fasta_path) as f:
-		name = f.readline().strip().replace(' ', '').split('>')[-1]
-		sequence = f.readline().strip()
-
-	return [name, sequence]
-
+from filters import pnas_filters, overlap_filters, quantitative_filters
+from utils import read_fasta
  
 @click.command()
 @click.option('--fasta', type=str, required=True, help='Path to fasta file of target RNA sequence')
@@ -27,18 +13,14 @@ def read_fasta(fasta_path):
 # @click.STRING('--FLAP_sequence', required=True, help='Name of FLAP sequence')
 
 @click.option('--acceptable_max', type=int, required=False, default=60, help='Maximum length of acceptable probe length. Based on the company you are ordering probes with (with FLAP sequence)')
-@click.option('--probe_min', type=int, required=False, default=20, help='Minimum length of desired probe (without FLAP sequence)')
-@click.option('--probe_max', type=int, required=False, default=30, help='Maximum length of desired probes (without FLAP sequence')
+@click.option('--probe_min', type=int, required=False, default=25, help='Minimum length of desired probe (without FLAP sequence)')
+@click.option('--probe_max', type=int, required=False, default=32, help='Maximum length of desired probes (without FLAP sequence')
 
 
 def main(fasta, output, probe_min, acceptable_max, probe_max):
 
-	# if len(sys.argv) < 2:
-	# 	print('Gimme more arguments!')
-	# 	quit()
-
-	sequence_name, MBP_seq = read_fasta(fasta)
-	print(sequence_name)
+	# Read in target fasta file
+	sequence_name, target_sequence = read_fasta(fasta)
 
 	# List of GC content filter
 	gc_filter = ['GC_filter']
@@ -47,8 +29,8 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 	filters = ['pnas1', 'pnas2', 'pnas3', 'pnas4', 'pnas5']
 
 	# Flip the inputed target RNA and replace bases to create complement strand
-	reverse = MBP_seq[::-1]
-	comp = MBP_seq.lower()[::-1].replace("g", "C").replace("c", "G").replace("t", "A").replace("a", "T").replace("u", "A")
+	reverse = target_sequence[::-1]
+	comp = target_sequence.lower()[::-1].replace("g", "C").replace("c", "G").replace("t", "A").replace("a", "T").replace("u", "A")
 
 	# Split complement strand (comp) into all possible probes between range (ex. 20-30 bases long)
 	split_probes = []
@@ -112,6 +94,8 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 	fdf.to_excel(output_file_path, sheet_name = 'All Data')
 	fdf.to_excel(ordering_output_file_path, columns=['well_position', 'final_sequence_name'], sheet_name = "Ordering Form")
 
+	fdf.to_csv(output_file_path)
+	fdf.to_csv(ordering_output_file_path, columns=['well_position', 'final_sequence_name'])
 
 
 
