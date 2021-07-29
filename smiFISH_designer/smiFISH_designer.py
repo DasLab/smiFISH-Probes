@@ -83,19 +83,19 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 	fdf['well_position'] = quantitative_filters.well_position_list(len(fdf))
 	print(fdf)
 
-	output_file_path = os.path.join(output, sequence_name + '_smiFISH_probes.xlsx')
-	ordering_output_file_path = os.path.join(output, sequence_name + '_ordering_smiFISH_probes.xlsx')
+	output_file_path = os.path.join(output, sequence_name + '_smiFISH_probes')
+	ordering_output_file_path = os.path.join(output, sequence_name + '_ordering_smiFISH_probes')
 
 	'''
 	Output excel with two sheets: 
 	1. all columns of final DataFrame
 	2. Ordering form
 	'''
-	fdf.to_excel(output_file_path, sheet_name = 'All Data')
-	fdf.to_excel(ordering_output_file_path, columns=['well_position', 'final_sequence_name'], sheet_name = "Ordering Form")
+	fdf.to_excel(output_file_path + '.xlsx', sheet_name = 'All Data')
+	fdf.to_excel(ordering_output_file_path + '.xlsx', columns=['well_position', 'final_sequence_name'], sheet_name = "Ordering Form")
 
-	fdf.to_csv(output_file_path)
-	fdf.to_csv(ordering_output_file_path, columns=['well_position', 'final_sequence_name'])
+	fdf.to_csv(output_file_path + '.csv')
+	fdf.to_csv(ordering_output_file_path + '.csv', columns=['well_position', 'final_sequence_name'])
 
 
 
