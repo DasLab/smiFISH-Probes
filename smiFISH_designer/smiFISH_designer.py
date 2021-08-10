@@ -2,25 +2,43 @@ import os
 
 import pandas as pd
 import click
+from configparser import ConfigParser
 
 from filters import pnas_filters, overlap_filters, quantitative_filters
 from utils import read_fasta, write_probes_fasta_from_dataframe
  
 @click.command()
-@click.option('--fasta', type=str, required=True, help='Path to fasta file of target RNA sequence')
-@click.option('--output', type=str, required=True, help='Path to output folder')
-# @click.STRING('--FLAP_name', required=True, help='Name of FLAP sequence')
-# @click.STRING('--FLAP_sequence', required=True, help='Name of FLAP sequence')
+# Must input either Fasta file or Config File
+@click.option('--input_file', '-i', type=str, required=True, help='Path to input file with target RNA name and sequence, either Fasta or Congig file')
+@click.option('--config_optional', '-co' , type=str, required=True, help='Path to optional config file with parameters')
+@click.option('--output', '-o', type=str, required=True, help='Path to output folder')
 
-@click.option('--acceptable_max', type=int, required=False, default=60, help='Maximum length of acceptable probe length. Based on the company you are ordering probes with (with FLAP sequence)')
-@click.option('--probe_min', type=int, required=False, default=26, help='Minimum length of desired probe (without FLAP sequence)')
-@click.option('--probe_max', type=int, required=False, default=32, help='Maximum length of desired probes (without FLAP sequence')
+def main(input_file, output, config_optional):
 
+	"""Parameters that are optional to change:
+		probe minimum and maximum length
+		acceptable probe length for ordering company
+		FLAP name and sequence
+	"""
+	parser = ConfigParser()
+	parser.read(config_optional)
+	probe_min = parser['OPTIONAL']['ProbeMin']
+	probe_max = parser['OPTIONAL']['ProbeMax']
+	acceptable_max = parser['OPTIONAL']['AcceptableProbeMax']
+	FLAP_name = parser['OPTIONAL']['FLAPName']
+	FLAP_sequence = parser['OPTIONAL']['FLAPSequence']
 
-def main(fasta, output, probe_min, acceptable_max, probe_max):
+	if input_file.endswith('.fa'):
+		fasta = input_file
+		sequence_name, target_sequence = read_fasta(fasta)
+	elif input_file.endswith('.cfg'):
+		config_required = input_file
+		parser.read(config_required)
+		sequence_name = parser['REQUIRED']['TargetName']
+		target_sequence = parser['REQUIRED']['TargetSequence']
+	else:
+		print('Use Fasta or Config file as input!')
 
-	# Read in target fasta file
-	sequence_name, target_sequence = read_fasta(fasta)
 
 	# List of GC content filter
 	gc_filter = ['GC_filter']
@@ -34,7 +52,7 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 
 	# Split complement strand (comp) into all possible probes between range (ex. 20-30 bases long)
 	split_probes = []
-	for n in range(probe_min, probe_max): 
+	for n in range(int(probe_min), int(probe_max)): 
 		for i in range(0, len(comp), n):
 			probe = comp[i:i + n]
 
@@ -48,8 +66,6 @@ def main(fasta, output, probe_min, acceptable_max, probe_max):
 
 	# Inputed names/sequences for FLAP and target RNA
 	target_name = sequence_name
-	FLAP_name = 'X'
-	FLAP_sequence = 'CCTCCTAAGTTTCGAGCTGGACTCAGTG'
 	final_sequence = [probe + FLAP_sequence for probe in split_probes]
 
 	# Adding columns to main DataFrame (boolean --> integers)

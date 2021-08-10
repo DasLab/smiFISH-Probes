@@ -1,5 +1,5 @@
 """
-TODO Include info about the paper here
+Paper: https://www.pnas.org/content/106/7/2289/tab-article-info
 """
 
 
