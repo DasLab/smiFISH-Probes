@@ -107,18 +107,7 @@
 
     <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
 
-	<div class="loader-wrapper w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
-	  <span class="text-blue-500 opacity-100 top-1/2 my-0 mx-auto block relative w-0 h-0" style="
-	    top: 50%;
-	">
-	    <i class="fas fa-circle-notch fa-spin fa-5x"></i>
-	  </span>
-	<script>
-		$(window).on("load", function(){
-			$(".loader-wrapper").fadeOut()
-		});
-	</script>
-	</div>
+	
 
     <main>
 
@@ -187,12 +176,16 @@
 
       <div class="row-start-4 col-start-1 col-end-6">
         <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
-        	<textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="base_check(target_sequence); total_length(); color_change();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
+        	<textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="validate_target_sequence();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
         	<div class='block text-sm font-medium text-gray-700 text-right'>
         	<span id="TotalNumberofCharacters"></span>
         	<span> / </span>
 			<span id = "MinCharacterTotalBox"></span>
 			<span> nt</span>
+      <div role="alert" class='hidden border border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700' id="target_sequence_errors">
+          <p>Something not ideal might be happening.</p>
+        </div>
+      </div>
 		</div>
 		</div>
 
@@ -232,7 +225,41 @@
 				  }
 				};
 
-			function calculate() {
+      function validate_target_sequence() {
+
+        $('#target_sequence_errors').empty();
+
+        errors = []
+
+        min_nucleotides = calculate_min_target_size();
+        target_sequence = document.getElementById('target_sequence').value;
+        target_length = target_sequence.length;
+
+        // First, check to make sure we have the minimum length met
+        if(target_length < min_nucleotides){
+          errors.push('Target sequence not long enough for desired number of probes.')
+        }
+
+        // Check base content
+        if(!base_check(target_sequence)){
+          errors.push('Invalid characters detected. Target sequence must only contain A/U/T/C/G');
+        }
+
+
+        if(errors.length > 0){
+          $('#target_sequence_errors').removeClass('hidden')
+
+          errors.forEach(element => {
+            $('#target_sequence_errors').append('<p>' + element + '<p>');
+          });
+        } else {
+          $('#target_sequence_errors').addClass('hidden');
+        }
+        console.log(errors);
+
+      }
+
+			function calculate_min_target_size() {
 		        var ProbeMaxBox = document.getElementById('probemax').value; 
 		        var NumberofProbesBox = document.getElementById('numberprobes').value;
 		        var MinCharacterTotal = document.getElementById('MinCharacterTotalBox'); 
@@ -241,16 +268,6 @@
 		        return myResult;
 		    }
 
-		    console.log(calculate());
-
-
-		    function total_length() {
-		    	var total_len = document.getElementById('target_sequence').value;
-		   		document.getElementById('TotalNumberofCharacters').innerHTML = total_len.length;
-		   		return total_len.length;
-				}
-
-			console.log(total_length())
 
 		    function color_change() {
 		    	var total_box_value = document.getElementById('TotalNumberofCharacters').value;
@@ -263,20 +280,18 @@
 		    	return total_box_value;
 		    }
 
-		   	console.log(color_change())
 
 
 			function base_check(target_sequence)
 			  {
 			   var letters = /^[AGCUagcu]+$/;
-			   if(target_sequence.value.match(letters))
+			   if(target_sequence.match(letters))
 			     {
 			      return true;
 			     }
 			   else
 			     {
-			     alert("Other character besides 'A' 'G' 'C' or 'U' added!");
-			     return false;
+			      return false;
 			     }
 			  }
 
@@ -285,7 +300,6 @@
 	</div>
 
 
-    </div>
     <div class="divide-y-2 divide-gray-200 py-4">
     	<div></div>
     	<div class='pt-4'>
@@ -307,380 +321,377 @@
 	        <div id="hidden_df_output" style="display: none;"></div>
 	        <div id="hidden_csv_output" style="display: none;"></div>
     </div>
-        <script>
+    <div class="loader-wrapper bg-white opacity-75 z-50">
+      <span class="text-blue-500 opacity-100 top-1/2 my-0 mx-auto block relative w-0 h-0" style="
+        top: 50%;">
+        <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+      </span>
+    </div>
 
-              console.log('Starting...')
+    <script>
 
-              var probe_min = document.getElementById("probemin").value;
-              document.getElementById("probemin").innerHTML = probe_min;
+    console.log('Starting...')
 
+    var probe_min = document.getElementById("probemin").value;
+    document.getElementById("probemin").innerHTML = probe_min;
 
-              // init Pyodide
-              async function main() {
-                let pyodide = await loadPyodide({
-                  indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.0/full/",
-                });
-                return pyodide;
-              }
 
+    // init Pyodide
+    async function main() {
+      let pyodide = await loadPyodide({
+        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.0/full/",
+      });
+      return pyodide;
+    }
 
 
-              let pyodideReadyPromise = main();
 
+    let pyodideReadyPromise = main();
+
 
-              let python = `
-              import pandas as pd
-              import numpy as np
-              import js
-              
-              `;
-
-              let probe_design_python = `
-
-              # Import information from form
-              target_sequence = js.document.getElementById("target_sequence").value
-              print(target_sequence)
-
-              target_name = js.document.getElementById("target_name").value
-              print(target_name)
-
-              probe_min = js.document.getElementById("probemin").value
-              print(probe_min)
-
-              probe_max = js.document.getElementById("probemax").value
-              print(probe_max)
-
-              FLAP_sequence = js.document.getElementById("FLAPSequence").value
-              print(FLAP_sequence)
-
-              FLAP_name = js.document.getElementById("FLAPName").value
-              print(FLAP_name)
-
-
-              # Flip the inputed target RNA and replace bases to create complement strand
-              reverse = target_sequence[::-1]
-              comp = target_sequence.lower()[::-1].replace("g", "C").replace("c", "G").replace("t", "A").replace("a", "T").replace("u", "A")
-
-              # Split complement strand (comp) into all possible probes between range (ex. 20-30 bases long)
-              split_probes = []
-              for n in range(int(probe_min), int(probe_max)): 
-                for i in range(0, len(comp), n):
-                  probe = comp[i:i + n]
-
-                  # If length of probe is shorter than minimum range, remove from list
-                  if len(probe) > 20:
-                    split_probes.append(probe)
-
-              # Inputed names/sequences for FLAP and target RNA
-              final_sequence = [probe + FLAP_sequence for probe in split_probes]
-
-              # List of GC content filter
-              gc_filter = ['GC_filter']
-
-              # List of 5 PNAS rules for optimum probe performance
-              filters = ['pnas1', 'pnas2', 'pnas3', 'pnas4', 'pnas5']
-
-              # PNAS 1: Filter out nucleotide compositions with A < 28%
-              def pnas_filter_1(probe_sequence):
-                percent_a = probe_sequence.count('A')/len(probe_sequence)
-                return 0.28 < percent_a
-
-              # PNAS 2: Remove anything with AAAA stacks
-              def pnas_filter_2(probe_sequence):
-                A_stack = 'AAAA'
-                if A_stack in probe_sequence:
-                  return False 
-                else:
-                  return True
-
-              # PNAS 3: Enforce C composition of between 22-28%
-              def pnas_filter_3(probe_sequence):
-                percent_c = probe_sequence.count('C')/len(probe_sequence)
-                return 0.22 < percent_c < 0.28
-
-              # PNAS 4: No CCCC stacks in any 6 consecutive nucleotides in the first 12 positions
-              def pnas_filter_4(probe_sequence):
-                C_stack = 'CCCC'
-                sequence_subset = probe_sequence[0:12]
-                if C_stack in sequence_subset:
-                  return False
-                else:
-                  return True 
-
-              # PNAS 5: No 4 nonconsecutive Cs in any 6 consecutive nucleotides in the first 12 positions
-              def pnas_filter_5(probe_sequence):
-                sequence_subset = probe_sequence[0:12]
-                for p in range(6):
-                  if sequence_subset[p:p+6].count('C') >= 4:
-                    return False
-                return True
-
-              # Calculate the max probe length (without FLAP sequence)
-              def max_probe(FLAP_sequence, acceptable_max):
-                calculate_max_probe = acceptable_max - len(FLAP_sequence)
-                return calculate_max_probe
-
-              # Calculate deltaG using Nearest-Neighbor Parameters
-              def deltaG1(probe_sequence):
-                table = {"AA":0.2, "AC":-1.4, "AG":-0.4, "AT":-0.4,
-                "CA":-1.6, "CC":-2.3, "CG":-1.4, "CT":-1.3,
-                "GA":-1.4, "GC":-2.0, "GG":-1.7, "GT":-1.5, 
-                "TA":-0.5, "TC":-1.5, "TG":-1.2, "TT":-0.7}
-
-                for p in range(len(probe_sequence)):
-                  # Add deltaG of pairing, then next pairing including the last base-pair (ex. ACGA = AC, CG, GA)
-                  list_of_pairs = [probe_sequence[p:2 + p] for p in range(0, len(probe_sequence))]
-                  # Delete last element of list, not a paired base
-                  list_of_pairs.pop()
-                  if len(list_of_pairs) > 0:
-                    # Make a series using the dictonary of calculated deltaG's
-                    C = pd.Series(list_of_pairs).map(table)
-                    D = list(C)
-                    return sum(D)
-                  else:
-                    return 'Error'
-
-              # Calculate GC percentage
-              def GC_percent(probe_sequence):
-                G = probe_sequence.count('G')
-                C = probe_sequence.count('C')
-                percent_GC = (G + C)/len(probe_sequence)
-                return percent_GC
-
-              # Filter for GC content between 40% and 60%
-              def GC_filter(probe_sequence):
-                  return 0.40 <= GC_percent(probe_sequence) <= 0.60
-
-              # Find start index of probe within complementary strand
-              def start_index(probe_sequence, comp):
-                if probe_sequence in comp:
-                  start = comp.find(probe_sequence)
-                  return start
-
-                return 'Error'
-
-              # Find end index of probe within complementary strand
-              def end_index(probe_sequence, comp):
-                if probe_sequence in comp:
-                  end = comp.find(probe_sequence)
-                  end += len(probe_sequence) - 1
-                  return end
-
-                return 'Error'
-
-              # Well position for ordering .xlsx
-              def well_position_list(n):
-                  well_y = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-                  newrow = [[i+str(j) for j in range(1,13)] for i in well_y]
-                  well_name = [j for i in newrow for j in i]
-                  well_name_array = np.array(well_name)
-                  
-                  well_names_output = []
-                  for p in range(n):
-                      well_names_output.append(well_name_array[p % len(well_name_array)])
-
-                  return well_names_output
-
-
-              # Takes in two intervals, and returns boolean if they overlap or not
-              def overlapping_intervals(a, b):
-                  if a[0] < b[0]:
-                      first = a
-                      second = b
-                  elif a[0] == b[0]:
-                      return True
-                  else:
-                      first = b
-                      second = a
-                      
-                  return first[1] > second[0]
-
-              # Takes start and end range of probe and compares it to start and end of other, lower-ranking probes
-              def check_probe_fits(probe_candidate, probe_list):
-                for probe in probe_list:
-                  if overlapping_intervals([probe['start'], probe['end']], [probe_candidate['start'], probe_candidate['end']]):
-                    return False
-                return True
-
-              # Find probes that are nonoverlapping based on their ranking of distance away from the median
-              def find_nonoverlapping_probes_around_median(df):
-                  
-                  # Calculate median delta G
-                  median = df['deltaG'].median()
-                  
-                  # Order rows in probes dataframe by distance to median with Pandas-function
-                  for probe in range(len(df['deltaG'])):
-                      result_index = df['deltaG'].sub(median).abs().argsort()[0:].tolist()
-                      ordered_rows = df.iloc[result_index]
-
-                  # Iteratively build list of non-overlapping probes around the median
-                  final_probe_list = [df.iloc[result_index[0]]]
-                  # Probe vs. all other probe_candidates based on ranking
-                  for index in result_index[1:]:
-                      probe_candidate = df.iloc[index]
-                      if check_probe_fits(probe_candidate, final_probe_list):
-                          final_probe_list.append(probe_candidate)
-                  
-                  return pd.DataFrame(final_probe_list)
-
-              df = pd.DataFrame()
-
-              # Adding columns to main DataFrame (boolean --> integers)
-              df['probe_sequence'] = split_probes
-              df['probe_length'] = df['probe_sequence'].apply(len)
-              df['start'] = df['probe_sequence'].apply(start_index, comp=comp)
-              df['end'] = df['probe_sequence'].apply(end_index, comp=comp)
-              df['pnas1'] = df['probe_sequence'].apply(pnas_filter_1).astype(int)
-              df['pnas2'] = df['probe_sequence'].apply(pnas_filter_2).astype(int)
-              df['pnas3'] = df['probe_sequence'].apply(pnas_filter_3).astype(int)
-              df['pnas4'] = df['probe_sequence'].apply(pnas_filter_4).astype(int)
-              df['pnas5'] = df['probe_sequence'].apply(pnas_filter_5).astype(int)
-              df['deltaG'] = df['probe_sequence'].apply(deltaG1)
-              df['GC'] = df['probe_sequence'].apply(GC_percent)
-              df['GC_filter'] = df['probe_sequence'].apply(GC_filter).astype(int)
-              df['target_name'] = target_name
-              df['FLAP_name'] = FLAP_name
-              df['FLAP_sequence'] = FLAP_sequence
-              df['final_sequence'] = final_sequence
-
-
-              # Given dataframe and filters, return filtered dataframes
-              def filter_df(df, filters):
-                  return df[df[filters].all(1)]
-
-              # NOTE: Requiers 
-              def iteratively_find_probe_set(df, filters, gc_filter):
-                  
-                  filtered_out_counts = {}
-
-                  for f in filters:
-                      filtered_out_count = len(df) - df[f].sum()
-                      filtered_out_counts[f] = filtered_out_count
-
-                  ordered_filters = sorted(filtered_out_counts, key=filtered_out_counts.get, reverse=False)
-                  
-                  gc_filter_on = df[df[gc_filter].all(1)]
-                  
-                  median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, filters))
-
-                  while len(median_and_filters) < 20:
-                      ordered_filters.pop(0)
-                      filtered_filters_df = filter_df(gc_filter_on, ordered_filters)
-                      median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, ordered_filters))
-                      
-                      if len(median_and_filters) >= 20:
-                          break
-                  
-                  if len(median_and_filters) >= 20:
-                      print('Found {} probes using filters {}'.format(len(median_and_filters), ' '.join(ordered_filters)))
-                      return median_and_filters
-                  else:
-                      raise ValueError('Not enough probes even with all filters off')
-
-              # Create DataFrame with GC filter and using filters
-              fdf = iteratively_find_probe_set(df, filters, gc_filter)
-
-
-              # Final sequence name (target name + FLAP name + ranking number)
-              fdf_index_reset = fdf.reset_index()
-              fdf_index = fdf_index_reset.index.map(str)
-              final_sequence_name = (target_name + '-' + FLAP_name + '-' + fdf_index)
-
-              # Output of final, filtered DataFrame
-              fdf['final_sequence_name'] = final_sequence_name
-              fdf['well_position'] = well_position_list(len(fdf))
-              print(fdf)
-              `;
-
-              let dataframe_py_to_html = `
-              fdf.to_html()
-              `;
-
-              let dataframe_py_to_csv = `
-              fdf.to_csv()
-              `;
-
-              let dataframe_py_to_excel = `
-              fdf.to_excel()
-              `;
-
-              //URL: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
-              function download(filename, text) {
-                  var element = document.createElement('a');
-                  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-                  element.setAttribute('download', filename);
-
-                  element.style.display = 'none';
-                  document.body.appendChild(element);
-
-                  element.click();
-
-                  document.body.removeChild(element);
-              }
-
-              async function evaluatePython() {
-                let pyodide = await pyodideReadyPromise;
-                // try {
-                //   let output = pyodide.runPython(python);
-                //   addToOutput(output);
-                // } catch (err) {
-                //   addToOutput(err);
-                // }
-
-                pyodide.loadPackage(['pandas']).then(() => {
-
-                  console.log(pyodide.runPython(python))
-
-
-                  document.getElementById('make-probe-button').onclick = function() {
-                    console.log('Make Probes button pressed')
-                    console.log(pyodide.runPython(probe_design_python))
-
-                    document.getElementById('hidden_df_output').innerHTML = pyodide.runPython(dataframe_py_to_html)
-                    console.log(pyodide.runPython(dataframe_py_to_html))
-
-					function edit_df() {
-						var df_hidden = document.getElementById("hidden_df_output");
-						var df_text = df_hidden.innerHTML;
-						let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="table-auto">');
-						document.getElementById('output').innerHTML = edited;
-						return edited
-					}
-					
-					console.log(edit_df());
-                    
-
-                  }
-                  
-
-                  document.getElementById('download-csv-button').onclick = function() {
-                    console.log('CSV button pressed')
-                    console.log(pyodide.runPython(dataframe_py_to_csv))
-                    document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
-                    var csv_text = document.getElementById('hidden_csv_output').textContent;
-                    download('filename.csv', csv_text)
-
-                  }
-
-                  // document.getElementById('download-excel-button').onclick = function() {
-                  //   console.log('Excel button pressed')
-                  //   console.log(pyoide.runPython(dataframe_py_to_excel))
-                  
-                  
-
-                })
-
-              }
-
-              evaluatePython()
-
-
-            </script>
+    let python = `
+    import pandas as pd
+    import numpy as np
+    import js
+    
+    `;
+
+    let probe_design_python = `
+
+    # Import information from form
+    target_sequence = js.document.getElementById("target_sequence").value
+    print(target_sequence)
+
+    target_name = js.document.getElementById("target_name").value
+    print(target_name)
+
+    probe_min = js.document.getElementById("probemin").value
+    print(probe_min)
+
+    probe_max = js.document.getElementById("probemax").value
+    print(probe_max)
+
+    FLAP_sequence = js.document.getElementById("FLAPSequence").value
+    print(FLAP_sequence)
+
+    FLAP_name = js.document.getElementById("FLAPName").value
+    print(FLAP_name)
+
+
+    # Flip the inputed target RNA and replace bases to create complement strand
+    reverse = target_sequence[::-1]
+    comp = target_sequence.lower()[::-1].replace("g", "C").replace("c", "G").replace("t", "A").replace("a", "T").replace("u", "A")
+
+    # Split complement strand (comp) into all possible probes between range (ex. 20-30 bases long)
+    split_probes = []
+    for n in range(int(probe_min), int(probe_max)): 
+      for i in range(0, len(comp), n):
+        probe = comp[i:i + n]
+
+        # If length of probe is shorter than minimum range, remove from list
+        if len(probe) > 20:
+          split_probes.append(probe)
+
+    # Inputed names/sequences for FLAP and target RNA
+    final_sequence = [probe + FLAP_sequence for probe in split_probes]
+
+    # List of GC content filter
+    gc_filter = ['GC_filter']
+
+    # List of 5 PNAS rules for optimum probe performance
+    filters = ['pnas1', 'pnas2', 'pnas3', 'pnas4', 'pnas5']
+
+    # PNAS 1: Filter out nucleotide compositions with A < 28%
+    def pnas_filter_1(probe_sequence):
+      percent_a = probe_sequence.count('A')/len(probe_sequence)
+      return 0.28 < percent_a
+
+    # PNAS 2: Remove anything with AAAA stacks
+    def pnas_filter_2(probe_sequence):
+      A_stack = 'AAAA'
+      if A_stack in probe_sequence:
+        return False 
+      else:
+        return True
+
+    # PNAS 3: Enforce C composition of between 22-28%
+    def pnas_filter_3(probe_sequence):
+      percent_c = probe_sequence.count('C')/len(probe_sequence)
+      return 0.22 < percent_c < 0.28
+
+    # PNAS 4: No CCCC stacks in any 6 consecutive nucleotides in the first 12 positions
+    def pnas_filter_4(probe_sequence):
+      C_stack = 'CCCC'
+      sequence_subset = probe_sequence[0:12]
+      if C_stack in sequence_subset:
+        return False
+      else:
+        return True 
+
+    # PNAS 5: No 4 nonconsecutive Cs in any 6 consecutive nucleotides in the first 12 positions
+    def pnas_filter_5(probe_sequence):
+      sequence_subset = probe_sequence[0:12]
+      for p in range(6):
+        if sequence_subset[p:p+6].count('C') >= 4:
+          return False
+      return True
+
+    # Calculate the max probe length (without FLAP sequence)
+    def max_probe(FLAP_sequence, acceptable_max):
+      calculate_max_probe = acceptable_max - len(FLAP_sequence)
+      return calculate_max_probe
+
+    # Calculate deltaG using Nearest-Neighbor Parameters
+    def deltaG1(probe_sequence):
+      table = {"AA":0.2, "AC":-1.4, "AG":-0.4, "AT":-0.4,
+      "CA":-1.6, "CC":-2.3, "CG":-1.4, "CT":-1.3,
+      "GA":-1.4, "GC":-2.0, "GG":-1.7, "GT":-1.5, 
+      "TA":-0.5, "TC":-1.5, "TG":-1.2, "TT":-0.7}
+
+      for p in range(len(probe_sequence)):
+        # Add deltaG of pairing, then next pairing including the last base-pair (ex. ACGA = AC, CG, GA)
+        list_of_pairs = [probe_sequence[p:2 + p] for p in range(0, len(probe_sequence))]
+        # Delete last element of list, not a paired base
+        list_of_pairs.pop()
+        if len(list_of_pairs) > 0:
+          # Make a series using the dictonary of calculated deltaG's
+          C = pd.Series(list_of_pairs).map(table)
+          D = list(C)
+          return sum(D)
+        else:
+          return 'Error'
+
+    # Calculate GC percentage
+    def GC_percent(probe_sequence):
+      G = probe_sequence.count('G')
+      C = probe_sequence.count('C')
+      percent_GC = (G + C)/len(probe_sequence)
+      return percent_GC
+
+    # Filter for GC content between 40% and 60%
+    def GC_filter(probe_sequence):
+        return 0.40 <= GC_percent(probe_sequence) <= 0.60
+
+    # Find start index of probe within complementary strand
+    def start_index(probe_sequence, comp):
+      if probe_sequence in comp:
+        start = comp.find(probe_sequence)
+        return start
+
+      return 'Error'
+
+    # Find end index of probe within complementary strand
+    def end_index(probe_sequence, comp):
+      if probe_sequence in comp:
+        end = comp.find(probe_sequence)
+        end += len(probe_sequence) - 1
+        return end
+
+      return 'Error'
+
+    # Well position for ordering .xlsx
+    def well_position_list(n):
+        well_y = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+        newrow = [[i+str(j) for j in range(1,13)] for i in well_y]
+        well_name = [j for i in newrow for j in i]
+        well_name_array = np.array(well_name)
+        
+        well_names_output = []
+        for p in range(n):
+            well_names_output.append(well_name_array[p % len(well_name_array)])
+
+        return well_names_output
+
+
+    # Takes in two intervals, and returns boolean if they overlap or not
+    def overlapping_intervals(a, b):
+        if a[0] < b[0]:
+            first = a
+            second = b
+        elif a[0] == b[0]:
+            return True
+        else:
+            first = b
+            second = a
+            
+        return first[1] > second[0]
+
+    # Takes start and end range of probe and compares it to start and end of other, lower-ranking probes
+    def check_probe_fits(probe_candidate, probe_list):
+      for probe in probe_list:
+        if overlapping_intervals([probe['start'], probe['end']], [probe_candidate['start'], probe_candidate['end']]):
+          return False
+      return True
+
+    # Find probes that are nonoverlapping based on their ranking of distance away from the median
+    def find_nonoverlapping_probes_around_median(df):
+        
+        # Calculate median delta G
+        median = df['deltaG'].median()
+        
+        # Order rows in probes dataframe by distance to median with Pandas-function
+        for probe in range(len(df['deltaG'])):
+            result_index = df['deltaG'].sub(median).abs().argsort()[0:].tolist()
+            ordered_rows = df.iloc[result_index]
+
+        # Iteratively build list of non-overlapping probes around the median
+        final_probe_list = [df.iloc[result_index[0]]]
+        # Probe vs. all other probe_candidates based on ranking
+        for index in result_index[1:]:
+            probe_candidate = df.iloc[index]
+            if check_probe_fits(probe_candidate, final_probe_list):
+                final_probe_list.append(probe_candidate)
+        
+        return pd.DataFrame(final_probe_list)
+
+    df = pd.DataFrame()
+
+    # Adding columns to main DataFrame (boolean --> integers)
+    df['probe_sequence'] = split_probes
+    df['probe_length'] = df['probe_sequence'].apply(len)
+    df['start'] = df['probe_sequence'].apply(start_index, comp=comp)
+    df['end'] = df['probe_sequence'].apply(end_index, comp=comp)
+    df['pnas1'] = df['probe_sequence'].apply(pnas_filter_1).astype(int)
+    df['pnas2'] = df['probe_sequence'].apply(pnas_filter_2).astype(int)
+    df['pnas3'] = df['probe_sequence'].apply(pnas_filter_3).astype(int)
+    df['pnas4'] = df['probe_sequence'].apply(pnas_filter_4).astype(int)
+    df['pnas5'] = df['probe_sequence'].apply(pnas_filter_5).astype(int)
+    df['deltaG'] = df['probe_sequence'].apply(deltaG1)
+    df['GC'] = df['probe_sequence'].apply(GC_percent)
+    df['GC_filter'] = df['probe_sequence'].apply(GC_filter).astype(int)
+    df['target_name'] = target_name
+    df['FLAP_name'] = FLAP_name
+    df['FLAP_sequence'] = FLAP_sequence
+    df['final_sequence'] = final_sequence
+
+
+    # Given dataframe and filters, return filtered dataframes
+    def filter_df(df, filters):
+        return df[df[filters].all(1)]
+
+    # NOTE: Requiers 
+    def iteratively_find_probe_set(df, filters, gc_filter):
+        
+        filtered_out_counts = {}
+
+        for f in filters:
+            filtered_out_count = len(df) - df[f].sum()
+            filtered_out_counts[f] = filtered_out_count
+
+        ordered_filters = sorted(filtered_out_counts, key=filtered_out_counts.get, reverse=False)
+        
+        gc_filter_on = df[df[gc_filter].all(1)]
+        
+        median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, filters))
+
+        while len(median_and_filters) < 20:
+            ordered_filters.pop(0)
+            filtered_filters_df = filter_df(gc_filter_on, ordered_filters)
+            median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, ordered_filters))
+            
+            if len(median_and_filters) >= 20:
+                break
+        
+        if len(median_and_filters) >= 20:
+            print('Found {} probes using filters {}'.format(len(median_and_filters), ' '.join(ordered_filters)))
+            return median_and_filters
+        else:
+            raise ValueError('Not enough probes even with all filters off')
+
+    # Create DataFrame with GC filter and using filters
+    fdf = iteratively_find_probe_set(df, filters, gc_filter)
+
+
+    # Final sequence name (target name + FLAP name + ranking number)
+    fdf_index_reset = fdf.reset_index()
+    fdf_index = fdf_index_reset.index.map(str)
+    final_sequence_name = (target_name + '-' + FLAP_name + '-' + fdf_index)
+
+    # Output of final, filtered DataFrame
+    fdf['final_sequence_name'] = final_sequence_name
+    fdf['well_position'] = well_position_list(len(fdf))
+    print(fdf)
+    `;
+
+    let dataframe_py_to_html = `
+    fdf.to_html()
+    `;
+
+    let dataframe_py_to_csv = `
+    fdf.to_csv()
+    `;
+
+    let dataframe_py_to_excel = `
+    fdf.to_excel()
+    `;
+
+    //URL: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+    async function evaluatePython() {
+      let pyodide = await pyodideReadyPromise;
+      // try {
+      //   let output = pyodide.runPython(python);
+      //   addToOutput(output);
+      // } catch (err) {
+      //   addToOutput(err);
+      // }
+
+      pyodide.loadPackage(['pandas']).then(() => {
+
+        console.log(pyodide.runPython(python))
+        $(".loader-wrapper").fadeOut()
+
+
+        document.getElementById('make-probe-button').onclick = function() {
+          console.log('Make Probes button pressed')
+          console.log(pyodide.runPython(probe_design_python))
+
+          document.getElementById('hidden_df_output').innerHTML = pyodide.runPython(dataframe_py_to_html)
+          console.log(pyodide.runPython(dataframe_py_to_html))
+        }
+
+
+        function edit_df() {
+          var df_hidden = document.getElementById("hidden_df_output");
+          var df_text = df_hidden.innerHTML;
+          let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="table-auto">');
+          document.getElementById('output').innerHTML = edited;
+          return edited
+        }
+
+        document.getElementById('download-csv-button').onclick = function() {
+          console.log('CSV button pressed')
+          console.log(pyodide.runPython(dataframe_py_to_csv))
+          document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
+          var csv_text = document.getElementById('hidden_csv_output').textContent;
+          download('filename.csv', csv_text)
+
+        }
+      })
+    }
+  
+    evaluatePython();
+
+
+        </script>
           </body>
           </div>
         <!-- /End replace -->
       </div>
     </main>
   </div>
+</div>
 </div>
 </html>
