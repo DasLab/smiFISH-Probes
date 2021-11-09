@@ -3,6 +3,7 @@
   <head>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
   </head>
 <!-- This example requires Tailwind CSS v2.0+ -->
 <meta charset="UTF-8">
@@ -12,15 +13,15 @@
       <div class="flex justify-between h-16">
         <div class="flex">
           <div class="flex-shrink-0 flex items-center">
-            <p style="font-size:40px">&#x1F41F;</p>
+            <p style="font-size:40px">&#128300;</p>
           </div>
           <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
             <a href="#" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium" aria-current="page">
-              Probe Designer
+              RNA Probe-ono
             </a>
 
-            <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+            <a href="html-about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
               About
             </a>
 
@@ -79,7 +80,7 @@
       <div class="pt-2 pb-3 space-y-1">
         <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" -->
         <a href="#" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium" aria-current="page">
-          Probe Designer
+          RNA Probe-ono
         </a>
 
         <a href="#" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
@@ -94,61 +95,218 @@
     </div>
   </nav>
 
-  <div class="py-10">
+  <div class="pt-10 pb-6">
     <header>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold leading-tight text-gray-900">
-          Automated smFISH/smiFISH probe designer
+          RNA Probe-ono
         </h1>
       </div>
     </header>
-    <main>
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
-        <div class="mt-1">
-        <input type="text" id="target_sequence" class="overflow-clip shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md" value="AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG"/>
+  </div>
+
+    <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
+
+	<div class="loader-wrapper w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+	  <span class="text-blue-500 opacity-100 top-1/2 my-0 mx-auto block relative w-0 h-0" style="
+	    top: 50%;
+	">
+	    <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+	  </span>
+	<script>
+		$(window).on("load", function(){
+			$(".loader-wrapper").fadeOut()
+		});
+	</script>
 	</div>
 
-        <label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
-        <input type="text" id="target_name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="MPB"/>
+    <main>
 
-        <lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Enter FLAP sequence:</lable>
-        <input type="text" id="FLAPSequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" />
+    <div class="block ml-8">
+	  <span class="text-gray-700">FLAP sequence:</span>
+	  <div class="mt-2">
+	    <div>
+	      <label class="inline-flex items-center">
+	        <input type="radio" id='r1' class="form-radio" name="radio" value="X_FLAP" checked>
+	        <span class="ml-2">X</span>
+	        <span id="X_FLAP" style="display: none">CCTCCTAAGTTTCGAGCTGGACTCAGTG</span>
+	      </label>
+	    </div>
+	    <div>
+	      <label class="inline-flex items-center">
+	        <input type="radio" id='r2' class="form-radio" name="radio" value="Y_FLAP">
+	        <span class="ml-2">Y</span>
+	        <span id="Y_FLAP" style="display: none"></span>
+	      </label>
+	    </div>
+	    <div>
+	      <label class="inline-flex items-center">
+	        <input type="radio" id='r3' class="form-radio" name="radio" value="Z_FLAP">
+	        <span class="ml-2">Z</span>
+	        <span id="Z_FLAP" style="display: none"></span>
+	      </label>
+	    </div>
+	    <div>
+	      <label class="inline-flex items-center">
+	        <input type="radio" id='r4' class="form-radio hidden" name="radio" value="Custom_FLAP">
+	        <span class="ml-2">Custom</span>
+	      </label>
 
-        <lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Enter FLAP name:</lable>
-        <input type="text" id="FLAPName" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="X" />
+	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG" style="display: none">
 
-        <lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Minimum probe length:</lable>
-        <input type="number" id="probemin" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="20" />
+	     <script>
+	      	document.getElementById('r4').onclick = function() {
+               console.log('Custom FLAP button presed');
+               targetInput = document.getElementById("CUSTOM_FLAP_Sequence");
+               if (targetInput.style.display !== "none") {
+				    targetInput.style.display = "none";
+				  } else {
+				    targetInput.style.display = "block";
+				  }
+				};
+	     </script>
+	    </div>
+	  </div>
+	</div>
 
-        <lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Maximum probe length:</lable>
-        <input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="30" />
-
-        <lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Acceptable probe length (maximum):</lable>
-        <input type="number" id="AcceptableProbeMax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="60" />
-        
-        <button id="make-probe-button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Make Probes!</button>
-
-        <button type="button" id="download-csv-button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        <!-- Heroicon name: solid/mail -->
-        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-        </svg>
-        Download CSV File
-        </button>
-
-        <button type="button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Download Excel File</button>
-
-        <!-- <textarea id="output" style="width: 100%;" rows="6" disabled></textarea> -->
-        <div id="output"></div>
-        <div id="hidden_df_output" style="display: none;"></div>
-        <div id="hidden_csv_output" style="display: none;"></div>
-
-        <div class="px-4 py-8 sm:px-0">
-          <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
+    <div class="grid grid-cols-6 gap-2 ml-8 mr-8">
+        <div class="row-start-1 col-start-1 col-end-3 w-1/3">
+        	<lable class="block text-sm font-medium text-gray-700">Enter FLAP name:</lable>
+        	<input type="text" id="FLAPName" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="X" />
         </div>
 
+		<div class="row-start-2 col-start-1 col-end-3">
+        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Enter FLAP sequence:</lable>
+        	<input type="text" id="FLAPSequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG"/>
+        </div>
+
+      <div class="row-start-3 col-start-1 col-end-3 w-1/2 justify-left">
+      	<label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
+        <input type="text" id="target_name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="MPB"/>
+      </div>
+
+      <div class="row-start-4 col-start-1 col-end-6">
+        <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
+        	<textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="base_check(target_sequence); total_length(); color_change();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
+        	<div class='block text-sm font-medium text-gray-700 text-right'>
+        	<span id="TotalNumberofCharacters"></span>
+        	<span> / </span>
+			<span id = "MinCharacterTotalBox"></span>
+			<span> nt</span>
+		</div>
+		</div>
+
+		<div class="col-start-1 col-end-5">
+			<button type="button" class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="accordion_open">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+				</svg>
+			  Additional options
+			  <!-- Heroicon name: solid/mail -->
+			</button>
+			<div id='hidden_accordion_box' class="bg-indigo-600 bg-opacity-50 w-1/2 pl-3 pb-2 rounded-md" style="display: none">
+				<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Number of Probes:</lable>
+	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20" oninput="calculate();"/>
+
+
+	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Minimum probe length:</lable>
+	        	<input type="number" id="probemin" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20"/>
+
+
+	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Maximum probe length:</lable>
+	        	<input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="30" oninput="calculate();"/>
+
+
+	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Acceptable probe length (maximum):</lable>
+	        	<input type="number" id="AcceptableProbeMax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="60" />
+			</div>
+
+		<script>
+           document.getElementById('accordion_open').onclick = function() {
+               console.log('Accordion button pressed');
+               targetDiv = document.getElementById("hidden_accordion_box");
+               if (targetDiv.style.display !== "none") {
+				    targetDiv.style.display = "none";
+				  } else {
+				    targetDiv.style.display = "block";
+				  }
+				};
+
+			function calculate() {
+		        var ProbeMaxBox = document.getElementById('probemax').value; 
+		        var NumberofProbesBox = document.getElementById('numberprobes').value;
+		        var MinCharacterTotal = document.getElementById('MinCharacterTotalBox'); 
+		        var myResult = ProbeMaxBox * NumberofProbesBox;
+		        	document.getElementById('MinCharacterTotalBox').innerHTML = myResult;
+		        return myResult;
+		    }
+
+		    console.log(calculate());
+
+
+		    function total_length() {
+		    	var total_len = document.getElementById('target_sequence').value;
+		   		document.getElementById('TotalNumberofCharacters').innerHTML = total_len.length;
+		   		return total_len.length;
+				}
+
+			console.log(total_length())
+
+		    function color_change() {
+		    	var total_box_value = document.getElementById('TotalNumberofCharacters').value;
+		    	var min_box_value = document.getElementById('MinCharacterTotalBox').value;
+		    	if(total_box_value < min_box_value){
+		    		TotalNumberofCharacters.style.color='red';
+		   		} else{
+		    		TotalNumberofCharacters.style.color='green';
+		    	}
+		    	return total_box_value;
+		    }
+
+		   	console.log(color_change())
+
+
+			function base_check(target_sequence)
+			  {
+			   var letters = /^[AGCUagcu]+$/;
+			   if(target_sequence.value.match(letters))
+			     {
+			      return true;
+			     }
+			   else
+			     {
+			     alert("Other character besides 'A' 'G' 'C' or 'U' added!");
+			     return false;
+			     }
+			  }
+
+			console.log(base_check(target_sequence))
+		</script>
+	</div>
+
+
+    </div>
+    <div class="divide-y-2 divide-gray-200 py-4">
+    	<div></div>
+    	<div class='pt-4'>
+	        <button id="make-probe-button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-8">
+	        	<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+				</svg>
+	        Make Probes!</button>
+
+	        <button type="button" id="download-csv-button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+	        <!-- Heroicon name: solid/mail -->
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+			</svg>
+	        Download CSV File
+	        </button>
+        <!-- <textarea id="output" style="width: 100%;" rows="6" disabled></textarea> -->
+	        <div id="output"></div>
+	        <div id="hidden_df_output" style="display: none;"></div>
+	        <div id="hidden_csv_output" style="display: none;"></div>
+    </div>
         <script>
 
               console.log('Starting...')
@@ -484,7 +642,7 @@
 					function edit_df() {
 						var df_hidden = document.getElementById("hidden_df_output");
 						var df_text = df_hidden.innerHTML;
-						let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="min-w-full divide-y divide-gray-200">');
+						let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="table-auto">');
 						document.getElementById('output').innerHTML = edited;
 						return edited
 					}
