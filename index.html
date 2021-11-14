@@ -25,12 +25,12 @@
               About
             </a>
 
-            <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Projects
+            <a href="html-protocol.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              Protocol
             </a>
 
-            <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Calendar
+            <a href="html-code.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              Code
             </a>
           </div>
         </div>
@@ -74,25 +74,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-      <div class="pt-2 pb-3 space-y-1">
-        <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" -->
-        <a href="#" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium" aria-current="page">
-          RNA Probe-ono
-        </a>
-
-        <a href="#" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-          Team
-        </a>
-
-        <a href="#" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-          Projects
-        </a>
-
-      </div>
-    </div>
   </nav>
 
   <div class="pt-10 pb-6">
@@ -110,15 +91,15 @@
 	
 
     <main>
-
-    <div class="block ml-8">
+    <div class="grid grid-cols-6 gap-2 ml-8">
+    <div class="block col-start-1 col-end-3">
+    <div class="shadow bg-gray-150 py-5 sm:p-6">
 	  <span class="text-gray-700">FLAP sequence:</span>
-	  <div class="mt-2">
+	  <div class="mt-2" oninput="radio_input();">
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='r1' class="form-radio" name="radio" value="X_FLAP" checked>
+	        <input type="radio" id='r1' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" checked>
 	        <span class="ml-2">X</span>
-	        <span id="X_FLAP" style="display: none">CCTCCTAAGTTTCGAGCTGGACTCAGTG</span>
 	      </label>
 	    </div>
 	    <div>
@@ -137,11 +118,12 @@
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='r4' class="form-radio hidden" name="radio" value="Custom_FLAP">
+	        <input type="radio" id='r4' class="form-radio" name="radio" value="">
 	        <span class="ml-2">Custom</span>
-	      </label>
+	    </label>
 
-	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG" style="display: none">
+	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG" style="display: none">
+
 
 	     <script>
 	      	document.getElementById('r4').onclick = function() {
@@ -152,29 +134,47 @@
 				  } else {
 				    targetInput.style.display = "block";
 				  }
+			document.getElementById("CUSTOM_FLAP_Sequence").onlinput = function() {
+				custom_value = document.getElementById("custom_value").value;
+            console.log(custom_value);
+            	}
 				};
 	     </script>
 	    </div>
 	  </div>
 	</div>
+	</div>
+		<script> 
+			function radio_input() {
+				var radios = document.getElementsByName('radio');
 
-    <div class="grid grid-cols-6 gap-2 ml-8 mr-8">
-        <div class="row-start-1 col-start-1 col-end-3 w-1/3">
+				for (var i = 0, length = radios.length; i < length; i++) {
+ 					if (radios[i].checked) {
+    				// do whatever you want with the checked radio
+    				console.log(radios[i].value);
+
+    			// only one radio can be logically checked, don't check the rest
+    			break;
+  				}
+			}}
+		</script>
+
+        <div class="col-start-1 col-end-3 w-1/3">
         	<lable class="block text-sm font-medium text-gray-700">Enter FLAP name:</lable>
         	<input type="text" id="FLAPName" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="X" />
         </div>
 
-		<div class="row-start-2 col-start-1 col-end-3">
+		<div class="col-start-1 col-end-3">
         	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Enter FLAP sequence:</lable>
         	<input type="text" id="FLAPSequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG"/>
         </div>
 
-      <div class="row-start-3 col-start-1 col-end-3 w-1/2 justify-left">
+      <div class="col-start-1 col-end-3 w-1/2 justify-left">
       	<label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
         <input type="text" id="target_name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="MPB"/>
       </div>
 
-      <div class="row-start-4 col-start-1 col-end-6">
+      <div class="col-start-1 col-end-6">
         <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
         	<textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="validate_target_sequence();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
         	<div class='block text-sm font-medium text-gray-700 text-right'>
@@ -190,16 +190,16 @@
 		</div>
 
 		<div class="col-start-1 col-end-5">
-			<button type="button" class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="accordion_open">
+			<button type="button" class="inline-flex items-center ml-8 px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="accordion_open">
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
 				</svg>
-			  Additional options
+			  Additional design parameters
 			  <!-- Heroicon name: solid/mail -->
 			</button>
-			<div id='hidden_accordion_box' class="bg-indigo-600 bg-opacity-50 w-1/2 pl-3 pb-2 rounded-md" style="display: none">
+			<div id='hidden_accordion_box' class="bg-indigo-500 bg-opacity-50 w-1/3 ml-8 pl-3 pb-2 rounded-md" style="display: none">
 				<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Number of Probes:</lable>
-	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20" oninput="calculate();"/>
+	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20" oninput="calculate_min_target_size();"/>
 
 
 	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Minimum probe length:</lable>
@@ -207,7 +207,7 @@
 
 
 	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Maximum probe length:</lable>
-	        	<input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="30" oninput="calculate();"/>
+	        	<input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="30" oninput="calculate_min_target_size();"/>
 
 
 	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Acceptable probe length (maximum):</lable>
@@ -285,7 +285,7 @@
 			function base_check(target_sequence)
 			  {
 			   var letters = /^[AGCUagcu]+$/;
-			   if(target_sequence.match(letters))
+			   if(String(target_sequence).match(letters))
 			     {
 			      return true;
 			     }
@@ -321,8 +321,9 @@
 	        <div id="hidden_df_output" style="display: none;"></div>
 	        <div id="hidden_csv_output" style="display: none;"></div>
     </div>
+	</div>
     <div class="loader-wrapper bg-white opacity-75 z-50">
-      <span class="text-blue-500 opacity-100 top-1/2 my-0 mx-auto block relative w-0 h-0" style="
+      <span class="text-indigo-500 opacity-100 top-1/2 my-8 mx-auto block relative w-0 h-0" style="
         top: 50%;">
         <i class="fas fa-circle-notch fa-spin fa-5x"></i>
       </span>

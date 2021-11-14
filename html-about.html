@@ -25,12 +25,12 @@
               About
             </a>
 
-            <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Projects
+            <a href="html-protocol.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              Protocol
             </a>
 
-            <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Calendar
+            <a href="html-code.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              Code
             </a>
           </div>
         </div>
@@ -104,20 +104,61 @@
         </h1>
       </div>
     </header>
-	<div class="shadow grid grid-rows-3 grid-flow-col gap-4">
-	  <div class="row-span-3 ..."></div>
+	<div class="shadow grid grid-rows-3 grid-cols-6 gap-2">
+	  <div class="col-start-1 col-end-5 row-start-1 pl-8">
 	  	<div class="shadow bg-gray-150 px-4 py-5 sm:p-6">
 	  		<div class="bg-red-100 border-b-4 border-red-200">
 	  		<h>&#10067; About RNA Probe-ono</h>
 	  		</div>
-	  <div class="col-span-2 ...">2</div>
-	  <div class="row-span-2 col-span-2 ...">3</div>
-	</div>
-	<div class="flex items-center justify-center">
-		<div class="grid grid-cols-6">
-		  <div class="col-start-2 col-end-6">
+	  	</div>
+	  </div>
+	  <div class="pr-8 col-start-5 col-end-7 row-start-1">
+	  	<div class="shadow bg-gray-150 py-5 sm:p-6">
+	  	<div class="bg-green-100 border-b-4 border-green-200 ">
+			<h class="text-lg">&#128172; Contact</h>
+		</div>
+			<div class="grid grid-cols-2 text-center">
+				<div class="col-start-1">
+				<p class="text-gray-800 opacity-75">
+					<i>Principle Investigator</i>
+				</p>
+				<b>Rhiju Das</b>
+			</div>
+			<div class="col-start-2">
+				<p class="text-gray-800 opacity-75">
+					<i>Server Admin</i>
+				</p>
+					<button class="font-bold hover:text-blue-600 focus:outline-none" id="ky_email">Kailee Yoshimura</button>
+					<script> 
+						document.getElementById('ky_email').onclick = function() {
+               				console.log('ky_email button pressed');
+               				window.location.href = "mailto:kaileeyo@stanford.edu";
+               			}
+					</script>
+				<p>
+					<button class="font-bold hover:text-blue-600 focus:outline-none" id="vt_email">Ved Topkar</button>
+				</p>
+				<script> 
+						document.getElementById('vt_email').onclick = function() {
+               				console.log('vt_email button pressed');
+               				window.location.href = "mailto:vtopkar@stanford.edu";
+               			}
+				</script>
+			</div>
+		</div>
+			<p class="text-center mt-4 inline">
+			Contact the <p class="font-bold hover:text-blue-600 focus:outline-none inline text-center" id="das_lab_button">Das Lab</p> for further questions/issues regarding the web server, suggestions for improvements, or citations.
+			</p>
+			<script>
+				document.getElementById("das_lab_button").onclick = function() {
+ 					window.open('https://daslab.stanford.edu/').focus();
+						}
+			</script>
+			</div>
+		</div>
+		  <div class="pl-8 col-start-1 col-end-6 row-start-2">
 		  	<div class="bg-white overflow-hidden shadow rounded-sm">
-			  <div class="bg-gray-100 px-4 py-5 sm:p-6">
+			  <div class="shadow bg-gray-150 py-5 sm:p-6">
 			    <!-- Content goes here -->
 			    <div class="bg-blue-100 border-b-4 border-blue-200 ">
 			    <h class="text-lg">&#128214; Citations</h>
@@ -137,7 +178,18 @@
 				</p>
 			  </div>
 			</div>
-		  </div>
+		</div>
+		  <div class="pl-8 col-start-1 col-end-6 row-start-3">
+		  	<div class="bg-white overflow-hidden shadow rounded-sm">
+			  <div class="shadow bg-gray-150 py-5 sm:p-6">
+			    <!-- Content goes here -->
+			    <div class="bg-purple-100 border-b-4 border-purple-200 ">
+			    <h class="text-lg">&#128193; History</h>
+			  </div>
+			 </div>
+			</div>
+		</div>
 	</div>
+</div>
 	    <!-- This example requires Tailwind CSS v2.0+ -->
 </html>
