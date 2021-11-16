@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
   </head>
-<!-- This example requires Tailwind CSS v2.0+ -->
+
 <meta charset="UTF-8">
+
 <div class="min-h-screen bg-white">
   <nav class="bg-white border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,44 +37,6 @@
             </a>
           </div>
         </div>
-            <!-- Heroicon name: outline/bell -->
-
-          <!-- Profile dropdown -->
-
-            <!--
-              Dropdown menu, show/hide based on menu state.
-
-              Entering: "transition ease-out duration-200"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95"
-            -->
-            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-
-            </div>
-        <div class="-mr-2 flex items-center sm:hidden">
-          <!-- Mobile menu button -->
-
-            <!--
-              Heroicon name: outline/menu
-
-              Menu open: "hidden", Menu closed: "block"
-            -->
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <!--
-              Heroicon name: outline/x
-
-              Menu open: "block", Menu closed: "hidden"
-            -->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
       </div>
     </div>
   </nav>
@@ -82,82 +47,104 @@
         <h1 class="text-3xl font-bold leading-tight text-gray-900">
           RNA Probe-ono
         </h1>
+        <p>
+          RNA Probe-ono is a tool for quickly designing oligonucleotide probes for single molecule inexpensive RNA FISH (<a href="https://dx.doi.org/10.1093%2Fnar%2Fgkw784">smiFISH</a>) experiments.
+        </p>
       </div>
     </header>
   </div>
 
-    <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css" integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
+    
 
 	
 
     <main>
     <div class="grid grid-cols-6 gap-2 ml-8">
-    <div class="block col-start-1 col-end-3">
-    <div class="shadow bg-gray-150 py-5 sm:p-6">
-	  <span class="text-gray-700">FLAP sequence:</span>
-	  <div class="mt-2" oninput="radio_input();">
-	    <div>
-	      <label class="inline-flex items-center">
-	        <input type="radio" id='r1' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" checked>
-	        <span class="ml-2">X</span>
-	      </label>
-	    </div>
-	    <div>
-	      <label class="inline-flex items-center">
-	        <input type="radio" id='r2' class="form-radio" name="radio" value="Y_FLAP">
-	        <span class="ml-2">Y</span>
-	        <span id="Y_FLAP" style="display: none"></span>
-	      </label>
-	    </div>
-	    <div>
-	      <label class="inline-flex items-center">
-	        <input type="radio" id='r3' class="form-radio" name="radio" value="Z_FLAP">
-	        <span class="ml-2">Z</span>
-	        <span id="Z_FLAP" style="display: none"></span>
-	      </label>
-	    </div>
-	    <div>
-	      <label class="inline-flex items-center">
-	        <input type="radio" id='r4' class="form-radio" name="radio" value="">
-	        <span class="ml-2">Custom</span>
-	    </label>
 
-	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG" style="display: none">
+<div class="col-start-1 col-end-3 w-1/2 justify-left">
+  <label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
+  <input type="text" id="target_name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="MPB"/>
+</div>
+
+<div class="col-start-1 col-end-6">
+  <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
+    <textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="validate_target_sequence();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
+    <div class='block text-sm font-medium text-gray-700 text-right'>
+    <span id="TotalNumberofCharacters"></span>
+    <span> / </span>
+<span id = "MinCharacterTotalBox"></span>
+<span> nt</span>
+<div role="alert" class='hidden border border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700' id="target_sequence_errors">
+    <p>Something not ideal might be happening.</p>
+  </div>
+</div>
+
+<div class="block col-start-1 col-end-3">
+  <div class="shadow bg-gray-150 py-5 sm:p-6">
+  <span class="text-gray-700">FLAP sequence:</span>
+  <div class="mt-2" oninput="radio_input();">
+    <div>
+      <label class="inline-flex items-center">
+        <input type="radio" id='r1' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" checked>
+        <span class="ml-2">X</span>
+      </label>
+    </div>
+    <div>
+      <label class="inline-flex items-center">
+        <input type="radio" id='r2' class="form-radio" name="radio" value="Y_FLAP">
+        <span class="ml-2">Y</span>
+        <span id="Y_FLAP" style="display: none"></span>
+      </label>
+    </div>
+    <div>
+      <label class="inline-flex items-center">
+        <input type="radio" id='r3' class="form-radio" name="radio" value="Z_FLAP">
+        <span class="ml-2">Z</span>
+        <span id="Z_FLAP" style="display: none"></span>
+      </label>
+    </div>
+    <div>
+      <label class="inline-flex items-center">
+        <input type="radio" id='r4' class="form-radio" name="radio" value="">
+        <span class="ml-2">Custom</span>
+    </label>
+
+      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG" style="display: none">
 
 
-	     <script>
-	      	document.getElementById('r4').onclick = function() {
-               console.log('Custom FLAP button presed');
-               targetInput = document.getElementById("CUSTOM_FLAP_Sequence");
-               if (targetInput.style.display !== "none") {
-				    targetInput.style.display = "none";
-				  } else {
-				    targetInput.style.display = "block";
-				  }
-			document.getElementById("CUSTOM_FLAP_Sequence").onlinput = function() {
-				custom_value = document.getElementById("custom_value").value;
-            console.log(custom_value);
-            	}
-				};
-	     </script>
-	    </div>
-	  </div>
-	</div>
-	</div>
-		<script> 
-			function radio_input() {
-				var radios = document.getElementsByName('radio');
+     <script>
+        document.getElementById('r4').onclick = function() {
+             console.log('Custom FLAP button presed');
+             targetInput = document.getElementById("CUSTOM_FLAP_Sequence");
+             if (targetInput.style.display !== "none") {
+          targetInput.style.display = "none";
+        } else {
+          targetInput.style.display = "block";
+        }
+    document.getElementById("CUSTOM_FLAP_Sequence").onlinput = function() {
+      custom_value = document.getElementById("custom_value").value;
+          console.log(custom_value);
+            }
+      };
+     </script>
+    </div>
+  </div>
+</div>
+</div>
+  <script> 
+    function radio_input() {
+      var radios = document.getElementsByName('radio');
 
-				for (var i = 0, length = radios.length; i < length; i++) {
- 					if (radios[i].checked) {
-    				// do whatever you want with the checked radio
-    				console.log(radios[i].value);
+      for (var i = 0, length = radios.length; i < length; i++) {
+         if (radios[i].checked) {
+          // do whatever you want with the checked radio
+          console.log(radios[i].value);
 
-    			// only one radio can be logically checked, don't check the rest
-    			break;
-  				}
-			}}
-		</script>
+        // only one radio can be logically checked, don't check the rest
+        break;
+        }
+    }}
+  </script>
 
         <div class="col-start-1 col-end-3 w-1/3">
         	<lable class="block text-sm font-medium text-gray-700">Enter FLAP name:</lable>
@@ -169,23 +156,7 @@
         	<input type="text" id="FLAPSequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG"/>
         </div>
 
-      <div class="col-start-1 col-end-3 w-1/2 justify-left">
-      	<label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
-        <input type="text" id="target_name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="MPB"/>
-      </div>
 
-      <div class="col-start-1 col-end-6">
-        <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
-        	<textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="validate_target_sequence();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
-        	<div class='block text-sm font-medium text-gray-700 text-right'>
-        	<span id="TotalNumberofCharacters"></span>
-        	<span> / </span>
-			<span id = "MinCharacterTotalBox"></span>
-			<span> nt</span>
-      <div role="alert" class='hidden border border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700' id="target_sequence_errors">
-          <p>Something not ideal might be happening.</p>
-        </div>
-      </div>
 		</div>
 		</div>
 
@@ -344,10 +315,6 @@
       });
       return pyodide;
     }
-
-
-
-    let pyodideReadyPromise = main();
 
 
     let python = `
@@ -643,51 +610,58 @@
     }
 
     async function evaluatePython() {
-      let pyodide = await pyodideReadyPromise;
       // try {
       //   let output = pyodide.runPython(python);
       //   addToOutput(output);
       // } catch (err) {
       //   addToOutput(err);
       // }
-
-      pyodide.loadPackage(['pandas']).then(() => {
-
-        console.log(pyodide.runPython(python))
-        $(".loader-wrapper").fadeOut()
+      let pyodideReadyPromise = main();
+      let pyodide = await pyodideReadyPromise;
 
 
-        document.getElementById('make-probe-button').onclick = function() {
+      document.getElementById('make-probe-button').onclick = function() {
+
+          
           console.log('Make Probes button pressed')
-          console.log(pyodide.runPython(probe_design_python))
 
-          document.getElementById('hidden_df_output').innerHTML = pyodide.runPython(dataframe_py_to_html)
-          console.log(pyodide.runPython(dataframe_py_to_html))
+          console.log('Loading pyodide and dependencies')
+
+          pyodide.loadPackage(['pandas']).then(() => {
+
+                  console.log(pyodide.runPython(python))
+                  $(".loader-wrapper").fadeOut()
+
+                  document.getElementById('download-csv-button').onclick = function() {
+                    console.log('CSV button pressed')
+                    console.log(pyodide.runPython(dataframe_py_to_csv))
+                    document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
+                    var csv_text = document.getElementById('hidden_csv_output').textContent;
+                    download('filename.csv', csv_text)
+                  }
+
+                  console.log(pyodide.runPython(probe_design_python))
+                  var dataframe_html = pyodide.runPython(dataframe_py_to_html)
+                  document.getElementById('hidden_df_output').innerHTML = dataframe_html
+                  console.log(dataframe_html)
+
+                })
+              }
+
+          
+        // TODO: Consider deleting this
+        // function edit_df() {
+        //   var df_hidden = document.getElementById("hidden_df_output");
+        //   var df_text = df_hidden.innerHTML;
+        //   let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="divide-y divide-gray-300">');
+        //   document.getElementById('output').innerHTML = edited;
+        //   return edited
+        // }
         
 
-
-        function edit_df() {
-          var df_hidden = document.getElementById("hidden_df_output");
-          var df_text = df_hidden.innerHTML;
-          let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="divide-y divide-gray-300">');
-          document.getElementById('output').innerHTML = edited;
-          return edited
-        }
-
-        console.log(edit_df());
-
     }
 
-        document.getElementById('download-csv-button').onclick = function() {
-          console.log('CSV button pressed')
-          console.log(pyodide.runPython(dataframe_py_to_csv))
-          document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
-          var csv_text = document.getElementById('hidden_csv_output').textContent;
-          download('filename.csv', csv_text)
-
-        }
-      })
-    }
+      
   
     evaluatePython();
 
