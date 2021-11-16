@@ -316,7 +316,7 @@
 			</svg>
 	        Download CSV File
 	        </button>
-        <!-- <textarea id="output" style="width: 100%;" rows="6" disabled></textarea> -->
+        	<!--- <textarea id="output" style="width: 100%;" rows="6" disabled></textarea> --->
 	        <div id="output"></div>
 	        <div id="hidden_df_output" style="display: none;"></div>
 	        <div id="hidden_csv_output" style="display: none;"></div>
@@ -378,6 +378,8 @@
     FLAP_name = js.document.getElementById("FLAPName").value
     print(FLAP_name)
 
+    number_of_probes = js.document.getElementById("numberprobes").value
+    print(number_of_probes)
 
     # Flip the inputed target RNA and replace bases to create complement strand
     reverse = target_sequence[::-1]
@@ -661,16 +663,20 @@
 
           document.getElementById('hidden_df_output').innerHTML = pyodide.runPython(dataframe_py_to_html)
           console.log(pyodide.runPython(dataframe_py_to_html))
-        }
+        
 
 
         function edit_df() {
           var df_hidden = document.getElementById("hidden_df_output");
           var df_text = df_hidden.innerHTML;
-          let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="table-auto">');
+          let edited = df_text.replace('<table border="1" class="dataframe">', '<table class="divide-y divide-gray-300">');
           document.getElementById('output').innerHTML = edited;
           return edited
         }
+
+        console.log(edit_df());
+
+    }
 
         document.getElementById('download-csv-button').onclick = function() {
           console.log('CSV button pressed')
