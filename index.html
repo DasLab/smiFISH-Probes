@@ -92,54 +92,37 @@
 
     <main>
     <div class="grid grid-cols-6 gap-2 ml-8">
-    <div class="block col-start-1 col-end-3">
+    <div id="radio div" class="block col-start-1 col-end-3 border-2 rounded-md">
     <div class="shadow bg-gray-150 py-5 sm:p-6">
 	  <span class="text-gray-700">FLAP sequence:</span>
 	  <div class="mt-2" oninput="radio_input();">
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='r1' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" checked>
+	        <input type="radio" id='FLAP X' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" oninput='radio_input()'>
 	        <span class="ml-2">X</span>
 	      </label>
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='r2' class="form-radio" name="radio" value="Y_FLAP">
+	        <input type="radio" id='FLAP Y' class="form-radio" name="radio" value="Y_FLAP" oninput='radio_input()'>
 	        <span class="ml-2">Y</span>
 	        <span id="Y_FLAP" style="display: none"></span>
 	      </label>
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='r3' class="form-radio" name="radio" value="Z_FLAP">
+	        <input type="radio" id='FLAP Z' class="form-radio" name="radio" value="Z_FLAP" oninput='radio_input()'>
 	        <span class="ml-2">Z</span>
 	        <span id="Z_FLAP" style="display: none"></span>
 	      </label>
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='r4' class="form-radio" name="radio" value="">
-	        <span class="ml-2">Custom</span>
-	    </label>
+	        <input type="radio" id='Custom FLAP' class="form-radio" name="radio" value="" oninput='radio_input()'>
+	        <span class="ml-2">Custom </span>
+	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md pl-2" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG">
+	      </label>
 
-	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG" style="display: none">
-
-
-	     <script>
-	      	document.getElementById('r4').onclick = function() {
-               console.log('Custom FLAP button presed');
-               targetInput = document.getElementById("CUSTOM_FLAP_Sequence");
-               if (targetInput.style.display !== "none") {
-				    targetInput.style.display = "none";
-				  } else {
-				    targetInput.style.display = "block";
-				  }
-			document.getElementById("CUSTOM_FLAP_Sequence").onlinput = function() {
-				custom_value = document.getElementById("custom_value").value;
-            console.log(custom_value);
-            	}
-				};
-	     </script>
 	    </div>
 	  </div>
 	</div>
@@ -150,23 +133,22 @@
 
 				for (var i = 0, length = radios.length; i < length; i++) {
  					if (radios[i].checked) {
-    				// do whatever you want with the checked radio
+    					FLAPName = radios[i].id;
+    					FLAPSequence = radios[i].value;
     				console.log(radios[i].value);
+    			}
 
-    			// only one radio can be logically checked, don't check the rest
-    			break;
-  				}
+    			document.getElementById('FLAPNameBox').value = FLAPName
+    			document.getElementById('FLAPSequenceBox').value = FLAPSequence
 			}}
 		</script>
 
         <div class="col-start-1 col-end-3 w-1/3">
-        	<lable class="block text-sm font-medium text-gray-700">Enter FLAP name:</lable>
-        	<input type="text" id="FLAPName" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="X" />
+        	<input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="display: none"/>
         </div>
 
 		<div class="col-start-1 col-end-3">
-        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Enter FLAP sequence:</lable>
-        	<input type="text" id="FLAPSequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG"/>
+        	<input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="display: none"/>
         </div>
 
       <div class="col-start-1 col-end-3 w-1/2 justify-left">
@@ -198,19 +180,19 @@
 			  <!-- Heroicon name: solid/mail -->
 			</button>
 			<div id='hidden_accordion_box' class="bg-indigo-500 bg-opacity-50 w-1/3 ml-8 pl-3 pb-2 rounded-md" style="display: none">
-				<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Number of Probes:</lable>
+				<lable class="block text-sm font-medium text-gray-700">Number of Probes:</lable>
 	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20" oninput="calculate_min_target_size();"/>
 
 
-	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Minimum probe length:</lable>
+	        	<lable class="block text-sm font-medium text-gray-700">Minimum probe length:</lable>
 	        	<input type="number" id="probemin" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20"/>
 
 
-	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Maximum probe length:</lable>
+	        	<lable class="block text-sm font-medium text-gray-700">Maximum probe length:</lable>
 	        	<input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="30" oninput="calculate_min_target_size();"/>
 
 
-	        	<lable for="FLAP sequence" class="block text-sm font-medium text-gray-700">Acceptable probe length (maximum):</lable>
+	        	<lable class="block text-sm font-medium text-gray-700">Acceptable probe length (maximum):</lable>
 	        	<input type="number" id="AcceptableProbeMax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="60" />
 			</div>
 
@@ -244,7 +226,6 @@
         if(!base_check(target_sequence)){
           errors.push('Invalid characters detected. Target sequence must only contain A/U/T/C/G');
         }
-
 
         if(errors.length > 0){
           $('#target_sequence_errors').removeClass('hidden')
@@ -372,10 +353,10 @@
     probe_max = js.document.getElementById("probemax").value
     print(probe_max)
 
-    FLAP_sequence = js.document.getElementById("FLAPSequence").value
+    FLAP_sequence = js.document.getElementById("FLAPSequenceBox").value
     print(FLAP_sequence)
 
-    FLAP_name = js.document.getElementById("FLAPName").value
+    FLAP_name = js.document.getElementById("FLAPNameBox").value
     print(FLAP_name)
 
     number_of_probes = js.document.getElementById("numberprobes").value
