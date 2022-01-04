@@ -66,7 +66,7 @@
 	  <div class="mt-2">
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='FLAP X' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" oninput='radio_input()' checked="checked">
+	        <input type="radio" id='FLAP X' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" onclick='radio_input()'>
 	        <span class="ml-2">X</span>
 	      </label>
 	    </div>
@@ -93,7 +93,11 @@
 	</div>
 	</div>
 
-      <div class="col-start-1 col-end-3 w-1/3">
+	<div class="col-start-1 col-end-3">
+	<div role="alert" class='hidden border border-red-400 rounded-md rounded-b bg-red-100 px-4 py-3 text-red-700' id="FLAP_radio_errors">
+    <p>Something not ideal might be happening with the FLAP radio.</p>
+  	</div>
+
           <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"/>
         </div>
 
@@ -130,7 +134,7 @@
     <span> / </span>
 <span id = "MinCharacterTotalBox"></span>
 <span> nt</span>
-<div role="alert" class='hidden border border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700' id="target_sequence_errors">
+<div role="alert" class='hidden border border-red-400 rounded-md bg-red-100 px-4 py-3 text-red-700' id="target_sequence_errors">
     <p>Something not ideal might be happening.</p>
   </div>
 </div>
@@ -139,14 +143,14 @@
 </div>
 
 		<div class="col-start-1 col-end-5">
-			<button type="button" class="inline-flex items-center ml-8 px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="accordion_open">
+			<button type="button" class="inline-flex items-center ml-8 px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="accordion_open">
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
 				</svg>
 			  Additional design parameters
 			  <!-- Heroicon name: solid/mail -->
 			</button>
-			<div id='hidden_accordion_box' class="bg-indigo-500 bg-opacity-50 w-1/3 ml-8 pl-3 pb-2 rounded-md" style="display: none">
+			<div id='hidden_accordion_box' class="bg-white border-2 border-indigo-200 w-1/3 ml-8 pl-3 pb-2 rounded-md" style="display: none">
 				<lable class="block text-sm font-medium text-gray-700">Number of Probes:</lable>
 	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20" oninput="calculate_min_target_size();"/>
 
@@ -174,6 +178,7 @@
 				  }
 				};
 
+
       function validate_target_sequence() {
 
         $('#target_sequence_errors').empty();
@@ -190,7 +195,7 @@
         }
 
         // Check base content
-        if(!base_check(target_sequence)){
+        if(!base_check_target(target_sequence)){
           errors.push('Invalid characters detected. Target sequence must only contain A/U/T/C/G');
         }
 
@@ -217,20 +222,7 @@
 		    }
 
 
-		    function color_change() {
-		    	var total_box_value = document.getElementById('TotalNumberofCharacters').value;
-		    	var min_box_value = document.getElementById('MinCharacterTotalBox').value;
-		    	if(total_box_value < min_box_value){
-		    		TotalNumberofCharacters.style.color='red';
-		   		} else{
-		    		TotalNumberofCharacters.style.color='green';
-		    	}
-		    	return total_box_value;
-		    }
-
-
-
-			function base_check(target_sequence)
+			function base_check_target(target_sequence)
 			  {
 			   var letters = /^[AGCUagcu]+$/;
 			   if(String(target_sequence).match(letters))
@@ -243,7 +235,7 @@
 			     }
 			  }
 
-			console.log(base_check(target_sequence))
+			console.log(base_check_target(target_sequence))
 		</script>
 	</div>
 
@@ -265,7 +257,7 @@
 	        Download CSV File
 	        </button>
         	<!--- <textarea id="output" style="width: 100%;" rows="6" disabled></textarea> --->
-	        <div id="output"></div>
+	        <div id="output" style="display: none;></div>
 	        <div id="hidden_df_output" style="display: none;"></div>
 	        <div id="hidden_csv_output" style="display: none;"></div>
     </div>
@@ -277,13 +269,24 @@
       </span>
     </div>
 
+    <!-- Progress bar -->
+	<div role='alert' class="hidden pl-8 pr-8" id='status_bar_div'>
+	  <h4 class="sr-only">Status</h4>
+	  <div class="mt-6" aria-hidden="true">
+	    <div class="bg-gray-200 rounded-full overflow-hidden">
+	      <div class="h-2 bg-indigo-600 rounded-full" style="width: 5%;" id='status_bar'></div>
+	    </div>
+	    <div class="hidden sm:grid grid-cols-4 text-sm font-medium text-gray-600 mt-6">
+	      <div class="text-left">Intergrating inputs</div>
+	      <div class="text-center">Designing all probes</div>
+	      <div class="text-center">Applying filters</div>
+	      <div class="text-right">Creating dataframe</div>
+	    </div>
+	  </div>
+	</div>
+
     <script>
-
     console.log('Starting...')
-
-    var probe_min = document.getElementById("probemin").value;
-    document.getElementById("probemin").innerHTML = probe_min;
-
 
     // init Pyodide
     async function main() {
@@ -611,21 +614,41 @@
       document.getElementById('make-probe-button').onclick = function() {
 
           
-          console.log('Make Probes button pressed')
+          console.log('Make Probes button pressed');
+
+
+		    	// Animation for progress bar
+	        	let progress = 0;
+	        	let invervalSpeed = 30;
+	        	let incrementSpeed = 1;
+	        	$('#status_bar_div').show();
+	            let bar = document.getElementById('status_bar');
+	            progressInterval = setInterval(function(){
+		                progress += incrementSpeed;
+		                bar.style.width = progress + "%";
+		                
+		                // This is creating issues (fadeOut('').then is not a function)
+		                if(progress >= 100){
+		                    clearInterval(progressInterval);
+		                    $('#status_bar_div').fadeOut(1500)
+		                    .then($('#output').show());
+		                }
+		            }, invervalSpeed);
+		        ;
+
+				console.log(pyodide.runPython(probe_design_python))
+				var dataframe_html = pyodide.runPython(dataframe_py_to_html)
+				document.getElementById('output').innerHTML = dataframe_html
+				console.log(dataframe_html)
 
 
                   document.getElementById('download-csv-button').onclick = function() {
                     console.log('CSV button pressed')
                     console.log(pyodide.runPython(dataframe_py_to_csv))
                     document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
-                    var csv_text = document.getElementById('hidden_csv_output').textContent;
-                    download('filename.csv', csv_text)
+                    var csv_text = document.getEementById('hidden_csv_output').textContent;
+                    download('RNAProbeono.csv', csv_text)
                   }
-
-                  console.log(pyodide.runPython(probe_design_python))
-                  var dataframe_html = pyodide.runPython(dataframe_py_to_html)
-                  document.getElementById('output').innerHTML = dataframe_html
-                  console.log(dataframe_html)
 
        }
      
@@ -660,6 +683,27 @@
         </script>
           </body>
           </div>
+          <!-- This example requires Tailwind CSS v2.0+ -->
+<footer class="bg-white">
+  <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+    <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+    <div class="mt-8 flex justify-center space-x-6">
+      <a href="https://github.com/DasLab/smiFISH-Probes" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">GitHub</span>
+        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+        </svg>
+      </a>
+
+      <a href="https://daslab.stanford.edu/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-500">
+        <span class="sr-only">Das Lab</span>
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+  			<path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
+		</svg>
+      </a>
+  </div>
+</footer>
+
         <!-- /End replace -->
       </div>
     </main>
