@@ -98,11 +98,11 @@
     <p>Something not ideal might be happening with the FLAP radio.</p>
   	</div>
 
-          <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"/>
+          <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="display: none;"/>
         </div>
 
     <div class="col-start-1 col-end-3">
-          <input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"/>
+          <input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="display: none;"/>
         </div>
 
 		<script> 
@@ -257,7 +257,7 @@
 	        Download CSV File
 	        </button>
         	<!--- <textarea id="output" style="width: 100%;" rows="6" disabled></textarea> --->
-	        <div id="output" style="display: none;></div>
+	        <div id="output" style="display: none;"></div>
 	        <div id="hidden_df_output" style="display: none;"></div>
 	        <div id="hidden_csv_output" style="display: none;"></div>
     </div>
@@ -626,7 +626,6 @@
 	            progressInterval = setInterval(function(){
 		                progress += incrementSpeed;
 		                bar.style.width = progress + "%";
-		                
 		                // This is creating issues (fadeOut('').then is not a function)
 		                if(progress >= 100){
 		                    clearInterval(progressInterval);
