@@ -94,11 +94,17 @@ def iteratively_find_probe_set(df, filters, gc_filter, min_probe_count=20):
     while len(median_and_filters) < min_probe_count:
         if len(median_and_filters) >= min_probe_count:
             break
+        
+        if len(ordered_filters) > 0:
+            removed_filter = ordered_filters.pop()
+            print('Removing filter ' + removed_filter)
+            filtered_filters_df = filter_df(gc_filter_on, ordered_filters)
+            median_and_filters = find_nonoverlapping_probes_around_dG_median(filter_df(gc_filter_on, ordered_filters))
+        else:
+            print('No more PNAS filters to remove...')
+            quit()
 
-        removed_filter = ordered_filters.pop()
-        print('Removing filter ' + removed_filter)
-        filtered_filters_df = filter_df(gc_filter_on, ordered_filters)
-        median_and_filters = find_nonoverlapping_probes_around_dG_median(filter_df(gc_filter_on, ordered_filters))
+
         
 
     
