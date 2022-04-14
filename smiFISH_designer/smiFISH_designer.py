@@ -5,39 +5,63 @@ import click
 from configparser import ConfigParser
 
 from filters import pnas_filters, overlap_filters, quantitative_filters
+from quantitative_filters import max_probe
 from utils import read_fasta, write_probes_fasta_from_dataframe
  
 @click.command()
 # Must input either Fasta file or Config File
-@click.option('--input_file', '-i', type=str, required=True, help='Path to input file with target RNA name and sequence, either Fasta or Congig file')
-@click.option('--config_optional', '-co' , type=str, required=True, help='Path to optional config file with parameters')
+@click.option('--fasta', '-fa', type=str, required=False, help='Path to target sequence fasta file')
 @click.option('--output', '-o', type=str, required=True, help='Path to output folder')
+@click.option('--config', '-cfg' , type=str, help='Path to optional config file with parameters')
 
-def main(input_file, output, config_optional):
+def main(fasta, config, output):
+	"""
+	There are two main ways to 
+	"""
+	print(fasta, config, output)
+	if config is not None:
+		parser = ConfigParser()
+		parser.read(config)
+
+		target_name = parser['REQUIRED']['TargetName']
+		target_sequence = parser['REQUIRED']['TargetSequence']
+
+		min_probe_number = int(parser['OPTIONAL']['MinProbeNumber'])
+		probe_min = parser['OPTIONAL']['ProbeMinLength']
+		probe_max = parser['OPTIONAL']['ProbeMaxLength']
+		AcceptableProbeMax = parser['OPTIONAL']['TotalProbeMaxLength']
+		FLAP_name = parser['OPTIONAL']['FLAPName']
+		FLAP_sequence = parser['OPTIONAL']['FLAPSequence']
+
+		
+		if fasta is not None:
+			print('Detected config file and inputted fasta. Ignoring inputted fasta file for config-defined sequence')
+
+	else:
+		print('Sit tight, will implement other functionality soon...')
+
 
 	"""Parameters that are optional to change:
 		probe minimum and maximum length
 		acceptable probe length for ordering company
 		FLAP name and sequence
 	"""
-	parser = ConfigParser()
-	parser.read(config_optional)
-	probe_min = parser['OPTIONAL']['ProbeMin']
-	probe_max = parser['OPTIONAL']['ProbeMax']
-	acceptable_max = parser['OPTIONAL']['AcceptableProbeMax']
-	FLAP_name = parser['OPTIONAL']['FLAPName']
-	FLAP_sequence = parser['OPTIONAL']['FLAPSequence']
 
-	if input_file.endswith('.fa'):
-		fasta = input_file
-		sequence_name, target_sequence = read_fasta(fasta)
-	elif input_file.endswith('.cfg'):
-		config_required = input_file
-		parser.read(config_required)
-		sequence_name = parser['REQUIRED']['TargetName']
-		target_sequence = parser['REQUIRED']['TargetSequence']
-	else:
-		print('Use Fasta or Config file as input!')
+	
+
+
+
+
+	# if input_file.endswith('.fa'):
+	# 	fasta = input_file
+	# 	sequence_name, target_sequence = read_fasta(fasta)
+	# elif input_file.endswith('.cfg'):
+	# 	config_required = input_file
+	# 	parser.read(config_required)
+	# 	sequence_name = parser['REQUIRED']['TargetName']
+	# 	target_sequence = parser['REQUIRED']['TargetSequence']
+	# else:
+	# 	print('Use Fasta or Config file as input!')
 
 
 	# List of GC content filter
@@ -65,7 +89,6 @@ def main(input_file, output, config_optional):
 	df = pd.DataFrame()
 
 	# Inputed names/sequences for FLAP and target RNA
-	target_name = sequence_name
 	final_sequence = [probe + FLAP_sequence for probe in split_probes]
 
 	# Adding columns to main DataFrame (boolean --> integers)
@@ -87,7 +110,7 @@ def main(input_file, output, config_optional):
 	df['final_sequence'] = final_sequence
 
 	# Create DataFrame with GC filter and using filters found in overlap_filters file
-	fdf = overlap_filters.iteratively_find_probe_set(df, filters, gc_filter)
+	fdf = overlap_filters.iteratively_find_probe_set(df, filters, gc_filter, min_probe_number)
 
 	# Final sequence name (target name + FLAP name + ranking number)
 	fdf_index_reset = fdf.reset_index()
@@ -99,8 +122,8 @@ def main(input_file, output, config_optional):
 	fdf['well_position'] = quantitative_filters.well_position_list(len(fdf))
 	print(fdf)
 
-	output_file_path = os.path.join(output, sequence_name + '_smiFISH_probes')
-	ordering_output_file_path = os.path.join(output, sequence_name + '_ordering_smiFISH_probes')
+	output_file_path = os.path.join(output, target_name + '_smiFISH_probes')
+	ordering_output_file_path = os.path.join(output, target_name + '_ordering_smiFISH_probes')
 
 	'''
 	Output excel with two sheets: 
@@ -116,7 +139,7 @@ def main(input_file, output, config_optional):
 	"""
 	Output a fasta file of probes for easy BLASTing
 	"""
-	write_probes_fasta_from_dataframe(fdf, os.path.join(output, sequence_name + '_filtered_probes.fa'))
+	write_probes_fasta_from_dataframe(fdf, os.path.join(output, target_name + '_filtered_probes.fa'))
 
 
 

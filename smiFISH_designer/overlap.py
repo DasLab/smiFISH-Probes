@@ -48,7 +48,7 @@ def filter_df(df, filters):
     return df[df[filters].all(True)]
 
 # NOTE: Requiers 
-def iteratively_find_probe_set(df, filters, gc_filter):
+def iteratively_find_probe_set(df, filters, gc_filter, min_probes):
     
     filtered_out_counts = {}
 
@@ -62,15 +62,15 @@ def iteratively_find_probe_set(df, filters, gc_filter):
     
     median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, filters))
 
-    while len(median_and_filters) < 20:
+    while len(median_and_filters) < min_probes:
         ordered_filters.pop(0)
         filtered_filters_df = filter_df(gc_filter_on, ordered_filters)
         median_and_filters = find_nonoverlapping_probes_around_median(filter_df(gc_filter_on, ordered_filters))
         
-        if len(median_and_filters) >= 20:
+        if len(median_and_filters) >= min_probes:
             break
     
-    if len(median_and_filters) >= 20:
+    if len(median_and_filters) >= min_probes:
         print('Found {} probes using filters {}'.format(len(median_and_filters), ' '.join(ordered_filters)))
         return median_and_filters
     else:

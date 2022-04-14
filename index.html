@@ -60,31 +60,31 @@
 
     <main>
     <div class="grid grid-cols-6 gap-2 ml-8">
-    <div id="radio div" class="block col-start-1 col-end-3 border-2 rounded-md">
+    <div id="radio div" class="block col-start-1 col-end-3 border-2 rounded-md" oninput="radio_input();">
     <div class="shadow bg-gray-150 py-5 sm:p-6">
 	  <span class="text-gray-700">FLAP sequence:</span>
 	  <div class="mt-2">
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='FLAP X' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" onclick='radio_input()'>
+	        <input type="radio" id='FLAP X' class="form-radio" name="radio" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" checked='checked'>
 	        <span class="ml-2">X</span>
 	      </label>
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='FLAP Y' class="form-radio" name="radio" value="Y_FLAP" oninput='radio_input()'>
+	        <input type="radio" id='FLAP Y' class="form-radio" name="radio" value="Y_FLAP">
 	        <span class="ml-2">Y</span>
 	      </label>
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='FLAP Z' class="form-radio" name="radio" value="Z_FLAP" oninput='radio_input()'>
+	        <input type="radio" id='FLAP Z' class="form-radio" name="radio" value="Z_FLAP">
 	        <span class="ml-2">Z</span>
 	      </label>
 	    </div>
 	    <div>
 	      <label class="inline-flex items-center">
-	        <input type="radio" id='Custom FLAP' class="form-radio" name="radio" value="" oninput='radio_input()'>
+	        <input type="radio" id='Custom FLAP' class="form-radio" name="radio" value="">
 	        <span class="ml-2 pr-2">Custom</span>
 	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG">
 	      </label>
@@ -98,11 +98,11 @@
     <p>Something not ideal might be happening with the FLAP radio.</p>
   	</div>
 
-          <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="display: none;"/>
+          <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="FLAP X"/>
         </div>
 
     <div class="col-start-1 col-end-3">
-          <input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" style="display: none;"/>
+          <input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG"/>
         </div>
 
 		<script> 
@@ -111,24 +111,24 @@
 
 				for (var i = 0, length = radios.length; i < length; i++) {
  					if (radios[i].checked) {
-    					FLAPName = radios[i].id;
-    					FLAPSequence = radios[i].value;
+    					var FLAPName = radios[i].id;
+    					var FLAPSequence = radios[i].value;
     				console.log(radios[i].value);
-
+    				}
     			document.getElementById('FLAPNameBox').value = FLAPName
     			document.getElementById('FLAPSequenceBox').value = FLAPSequence
-			}}
-    }
+    				}
+			}
 		</script>
 
 <div class="col-start-1 col-end-3 w-1/2 justify-left">
   <label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
-  <input type="text" id="target_name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="MPB"/>
+  <input type="text" id="target_name" class="shadow-sm border-2 border-gray-400 rounded-md focus:ring-indigo-500 focus:border-indigo-500 block w-full" value="MPB"/>
 </div>
 
 <div class="col-start-1 col-end-6">
   <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
-    <textarea type="text" id="target_sequence" class="resize-y border rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="validate_target_sequence();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
+    <textarea type="text" id="target_sequence" rows="3" class="resize-y border-2 border-gray-400 rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" oninput="validate_target_sequence();">AAAGACAGGCCCUCAGAGUCCGACGAGCUUCUCAGAGUCCGACGAGCUUCAGACCAUCCAAGAAGAUCCCACAGCAGCUUCCGAAGGCCUGGAUGUGAUGGCAUCACAGAAGAGACCCUCACAGCGACACGGGUCCAAGUACUUGGCCACAGCAAGUACCAUGGACCAUGCCCGGCAUGGCUUCCUCCCAAGGCACAGAGACACGGGCAUCCUUGACUCCAUCGGGCGCUUCUUUAGCGGUGACAGGGGUGCGCCCAAGCGGGGCUCUGGCAAGGUACCCUGGCUAAAGCAGAGCCGGAGCCCUCUGCCUUCUCAUGCCCGCAGCCGUCCCGGGCUGUGCCACAUGUACAAGGACUCACACACAAGAACUACCCACUACGGCUCCCUGCCCCAGAAGUCGCAGAGGACCCAAGAUGAAAACCCAGUAGUCCACUUCUUCAAGAACAUUGUGACACCUCGUACACCCCCUCCAUCCCAAGGAAAGGGGAGAGGCCUGUCCCUCAGCAGAUUUAGCUGGGGGGCCGAGGGGCAGAAGCCAGGAUUUGGCUACGGAGGCAGAGCUUCCGACUAUAAAUCGGCUCACAAGGGAUUCAAGGGGGCCUACGACGCCCAGGGCACGCUUUCCAAAAUCUUUAAGCUGGGAGGAAGAGACAGCCGCUCUGGAUCUCCCAUGGCAAGACGCUGAGAGCCUCCCUGCUCAGCCUUCCCGAAUCCUGCCCUCGGCUUCUUAAUAUAACUGCCUUAAACGUUUAAUUCUACUUGCACCAAAUAGCUAGUUAGAGCAGACCCUCUCUUAAUCCCGUGGGGCUGUGAACGCGGCGGGGCCAGGCCCACGGCACCCUGACUGGCUAAAACUGUUUGUCCCUUUUUAUUUGAAGAUUGAGUUUCCUCGGGGUCUUCUCUGCCCCGACUUGCUCCCCGUGUACCUUGGUCGACUCCGGAGGUUCAGGUGCACGGACACCCUUUCAAGUUCACCCCUACUCCAUCCUCAGACUUUCUUUUCACGGCGAGGCGCACCCCUCCAGCUUCCGUGGGCACUGCGGAUAGACAGGCACACCGCCAAGGAGCCAGAGAGCAUGGCGCAGGGGACUGUGUGGUCCAGGCUUCCUUUGUUUUCUUUCCCCUAAAGAGCUUUGUUUUUCCUAACAGGAUCAGACAGUCUUGGAGUGGCUUACACAACGGGGGCUUGUGGUAUGUGAGCACAGGCUGGGCAGCUGUGAGAGUCCAGAGUGGGGUGGCCCUGGGGACGCUUCCAGGCCAGCGGUUCCCUGCACCCCACCAGCUGAUUUCGAGCGUGGCAGAGGGAAGGAAAGGGGCGAGCGGGCUGGGCAAUGGACCCGACAGGAAACGGGGACUUAGGGGAACACGCUGGAGAUGCCAUGUGUGGCUGCCGAAGGUCACCAUCUCUCCUCAGUGGCUCCCCAGAGCAGGUGCUUUUAAGAACCCUGUUUCCUCUCAGAGCCCAGGGAGAGUCCAAGGACAUGGCGCAUCAGGAAGUGGGACUGCAGGAGUUCUCUGGUGGCCUCGUGCUGUCCCUCUGGCCACUUCUCACUUUAGGGUGGUCAGCGGCAGCUCGCCAUGGCAGUGCCCAUUGGUGCACACUAACCUCAGUGGAAAAGUAACCAUUCCCUGCCUCUUAGAAAGAACUCAUUCUUAGUUUUAGGAGGGUUCCUGUCGCUGAAUCAAGUCGCUGCCCUGGAUGCAGGGCUGGCCUGGGCGACCCUCCAGGGAUGAGGAGCUCAGAAUUCCAGUCUUCUAAUGUCCACGGACACCUCCCCAUCCCUCUAACGUACUGACUAUGUCUUUUGAUUUAGCAUGUCUUCUAUAGACCUUCCAAAGAGACCCACACUGGCACUGUCACCCCCUAGGAGGGAAGGUGAUGGUUGAUGUAGCCCGACGCGCAUCUUGUUAAUCCGUUCUAAUUCCGAGGAGAGUGUGGGUUUAAGAUAACACCUAUUAAUGCAUUGCCACAAUAAUGUGGGGGUAAGAGAAACGCAGGGACGAAACUUCCAGAAACAAACCCUCCAGAUCGUUCCACAGGAGUGUUCGCCCUCCGGUGUGACUGAACGACCGACCUUGCCCAUGGCUUCAUCCAGACAGCACAGCUGCAGUAUGGCUGGACAGAAGCACCUACUGUUCUUGGAUAUUGAAAUAAAAUAAUAAACUUGCAAUGAUCUUUG</textarea>
     <div class='block text-sm font-medium text-gray-700 text-right'>
     <span id="TotalNumberofCharacters"></span>
     <span> / </span>
@@ -152,7 +152,7 @@
 			</button>
 			<div id='hidden_accordion_box' class="bg-white border-2 border-indigo-200 w-1/3 ml-8 pl-3 pb-2 rounded-md" style="display: none">
 				<lable class="block text-sm font-medium text-gray-700">Number of Probes:</lable>
-	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20" oninput="calculate_min_target_size();"/>
+	        	<input type="number" id="numberprobes" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="20"/>
 
 
 	        	<lable class="block text-sm font-medium text-gray-700">Minimum probe length:</lable>
@@ -160,7 +160,7 @@
 
 
 	        	<lable class="block text-sm font-medium text-gray-700">Maximum probe length:</lable>
-	        	<input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="30" oninput="calculate_min_target_size();"/>
+	        	<input type="number" id="probemax" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/5 sm:text-sm border-gray-300 rounded-md" value="30"/>
 
 
 	        	<lable class="block text-sm font-medium text-gray-700">Acceptable probe length (maximum):</lable>
@@ -212,7 +212,7 @@
 
       }
 
-			function calculate_min_target_size() {
+			function calculate_min_target_size(probemax, numberprobes) {
 		        var ProbeMaxBox = document.getElementById('probemax').value; 
 		        var NumberofProbesBox = document.getElementById('numberprobes').value;
 		        var MinCharacterTotal = document.getElementById('MinCharacterTotalBox'); 
