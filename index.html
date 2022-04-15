@@ -60,9 +60,9 @@
 
     <main>
     <div class="grid grid-cols-6 gap-2 ml-8">
-    <div id="radio div" class="block col-start-1 col-end-3 border-2 rounded-md" oninput="radio_input();">
-    <div class="shadow bg-gray-150 py-5 sm:p-6">
-	  <span class="text-gray-700">FLAP sequence:</span>
+    		  <span class="block text-sm font-medium text-gray-700">FLAP sequence:</span>
+    <div id="radio div" class="block col-start-1 col-end-4" oninput="radio_input();">
+    <div class="shadow bg-gray-150 pl-6 pt-2 pb-2 border-2 rounded-md">
 	  <div class="mt-2">
 	    <div>
 	      <label class="inline-flex items-center">
@@ -89,16 +89,15 @@
 	      </label>
 	    </div>
       <div>
-		  <div class="inline-flex items-center">
-		    <div class="inline-flex items-center">
+		  <label class="inline-flex items-center">
 		      <input type="radio" id='Custom FLAP' class="form-radio" name="radio" value="">
 		      <span class="ml-2">Custom</span>
-	      <input type="text" id="CUSTOM_FLAP_Sequence" class="shadow-sm space-x-1 px-1 py-1 focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md" placeholder="CCTCCTAAGTTTCGAGCTGGACTCAGTG">
-	      </label>
-		    </div>
-		    <button type="custom_FLAP_button" class="-ml-px relative inline-flex items-center space-x-1 px-1 py-1 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block">
+		  </label>
+		<div class="hidden inline-flex" id="CUSTOM_FLAP_div">
+	      <input type="text" id="CUSTOM_FLAP_Sequence" class="box-content w-50 shadow-sm space-x-2 px-2 border-2 border-gray-400 rounded-l-md focus:border-indigo-500 block text-sm" placeholder="Enter custom FLAP seq.">
+		    <button type="CUSTOM_FLAP_Button" class="-ml-px relative inline-flex items-center space-x-1 px-1 border border-gray-400 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block">
 		      <span>Enter</span>
-		    </button>
+		      </button>
 		  </div>
 		</div>
 	  </div>
@@ -127,10 +126,17 @@
     					var FLAPSequence = radios[i].value;
     				console.log(radios[i].value);
     				}
-    			document.getElementById('FLAPNameBox').value = FLAPName
-    			document.getElementById('FLAPSequenceBox').value = FLAPSequence
+    				if (FLAPName === 'Custom FLAP') {
+    					$('#CUSTOM_FLAP_div').removeClass('hidden');
     				}
-			}
+    				else {
+         				$('#CUSTOM_FLAP_div').addClass('hidden');
+        			}
+
+    			document.getElementById('FLAPNameBox').value = FLAPName
+				document.getElementById('FLAPSequenceBox').value = FLAPSequence
+    				}
+    			}
 		</script>
 
 <div class="col-start-1 col-end-3 w-1/2 justify-left">
