@@ -60,7 +60,8 @@
 
     <main>
     <div class="grid grid-cols-6 gap-2 ml-8">
-    		  <span class="block text-sm font-medium text-gray-700">FLAP sequence:</span>
+ <!-- Radio box for FLAP seuqence, including custom FLAP sequence input -->
+   	<span class="block text-sm font-medium text-gray-700">FLAP sequence:</span>
     <div id="radio div" class="block col-start-1 col-end-4" oninput="radio_input();">
     <div class="shadow bg-gray-150 pl-6 pt-2 pb-2 border-2 rounded-md">
 	  <div class="mt-2">
@@ -104,18 +105,52 @@
 	</div>
 	</div>
 
+<!-- Status bar that tells user what tasks are done and what still needs to be completed -->
+<fieldset class="col-start-5 col-end-7">
+  <legend class="sr-only">Status</legend>
+	  <div class="relative flex items-start">
+	    <div class="flex items-center h-5">
+			<svg id="status_FLAP_sequence" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+			</svg>
+	    </div>
+	    <div class="ml-3 text-sm">
+	      <label for="comments" class="font-medium text-gray-700">FLAP sequence</label>
+	      <p id="comments-description" class="text-gray-500">FLAP name:</p>
+	      <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="FLAP X" disabled/>
+	      <p id="comments-description" class="text-gray-500">FLAP sequence:</p>
+	      <input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md w-48" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" disabled/>
+	    </div>
+	  </div>
+	  <div class="relative flex items-start">
+	    <div class="flex items-center h-5">
+			<svg id="status_target_name" xmlns="http://www.w3.org/2000/svg" class="opacity-25 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+			</svg>
+	    </div>
+	    <div class="ml-3 text-sm">
+	      <label for="candidates" class="font-medium text-gray-700">Target RNA name</label>
+	    </div>
+	  </div>
+	  <div class="relative flex items-start">
+	    <div class="flex items-center h-5">
+	      	<svg id="status_target_sequence" xmlns="http://www.w3.org/2000/svg" class="opacity-25 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+			</svg>
+	    </div>
+	    <div class="ml-3 text-sm">
+	      <label for="offers" class="font-medium text-gray-700">Target RNA sequence</label>
+	    </div>
+	  </div>
+	</fieldset>
+
+
 	<div class="col-start-1 col-end-3">
 	<div role="alert" class='hidden border border-red-400 rounded-md rounded-b bg-red-100 px-4 py-3 text-red-700' id="FLAP_radio_errors">
     <p>Something not ideal might be happening with the FLAP radio.</p>
   	</div>
-
-          <input type="text" id="FLAPNameBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="FLAP X"/>
-        </div>
-
-    <div class="col-start-1 col-end-3">
-          <input type="text" id="FLAPSequenceBox" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG"/>
-        </div>
-
+   </div>
+   		<!--Function to take selected FLAP name and sequence from radio into input boxes found within the status bar -->
 		<script> 
 			function radio_input() {
 				var radios = document.getElementsByName('radio');
