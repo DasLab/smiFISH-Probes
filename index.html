@@ -48,7 +48,7 @@
           RNA Probe-ono
         </h1>
         <p>
-          RNA Probe-ono is a tool for quickly designing oligonucleotide probes for single-molecule inexpensive RNA FISH (<a class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" href="https://dx.doi.org/10.1093%2Fnar%2Fgkw784">smiFISH</a>) experiments.
+          RNA Probe-ono is a tool for quickly designing oligonucleotide probes for single-molecule inexpensive RNA FISH (<a class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" href="https://dx.doi.org/10.1093%2Fnar%2Fgkw784" target="_blaknk">smiFISH</a>) experiments.
         </p>
       </div>
     </header>
@@ -593,7 +593,7 @@
     def filter_df(df, filters):
         return df[df[filters].all(1)]
 
-    # NOTE: Requiers 
+    # NOTE: Requiers, removes least stringent PNAS rule if less than desired amount of probes
     def iteratively_find_probe_set(df, filters, gc_filter):
         
         filtered_out_counts = {}

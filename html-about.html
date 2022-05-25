@@ -89,16 +89,16 @@
 	  <div class="col-start-1 col-end-5 row-start-1 pl-8">
 	  	<div class="shadow bg-gray-150 px-4 py-5 sm:p-6">
 	  		<div class="bg-red-100 border-b-4 border-red-200">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
 	  		<h>About RNA Probe-ono</h>
 	  		</div>
 				<p class="inline">RNA Probe-ono is a locally-run website that utilizes Pyodide to run a Python script that automatically generates probes for single-molecule inexpensive RNA fluorescent <i>in situ</i> hybridization <p class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" id="smiFISH_button">(smiFISH)</p> experiments. The Python script, developed by the Das Lab at Stanford University, takes an inputted RNA sequence and outputs an excel file of probes ready to be uploaded to online DNA ordering systems. The Python software and locally-run website help remove the problematic task of probe generation and allow the general science community to conduct single-molecule RNA detection experiments.</p>
 	  		</div>
 	  		<script>
 				document.getElementById("smiFISH_button").onclick = function() {
- 					window.open('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5159540/pdf/gkw784.pdf').focus();
+ 					window.open('https://dx.doi.org/10.1093%2Fnar%2Fgkw784').focus();
 						}
 			</script>
 	  	</div>
@@ -119,7 +119,7 @@
 			</div>
 			<div class="col-start-2">
 				<p class="text-gray-800 opacity-75">
-					<i>Software Contact</i>
+					<i>Website Creators</i>
 				</p>
 					<button class="font-bold hover:text-blue-600 focus:outline-none" id="ky_email">Kailee Yoshimura</button>
 					<script> 
@@ -159,28 +159,32 @@
           </svg>
 			    <h class="text-lg">Citations</h>
 				</div>
+        <p>
+        <p class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" id="nucleic_acids_button">Nearest-neighbor for RNA/DNA hybrids</p>
+        </p>
+        <script>
+        document.getElementById("nucleic_acids_button").onclick = function() {
+          window.open('https://academic.oup.com/nar/article/48/21/12042/5871365').focus();
+            }
+        </script>
+        <p>
+        Banerjee, Dipanwita, et al. "Improved nearest-neighbor parameters for the stability of RNA/DNA hybrids under a physiological condition." Nucleic acids research 48.21 (2020): 12042-12054.
+        </p>
+
+        <p>
+        <a href="https://academic.oup.com/nar/article/44/22/e165/2691336" class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" target="_blank">smiFISH and FISH-quant</a>
+        <p>
+        Tsanov, Nikolay, et al. "smiFISH and FISH-quant - a flexible single RNA detection approach with super-resolution capability." Nucleic acids research 44.22 (2016): e165.
 			    <p>
 			    <p class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" id="PNAS_button">PNAS</p>
 				</p>
 				<script>
 				document.getElementById("PNAS_button").onclick = function() {
- 					window.open('https://www.pnas.org/content/pnas/106/7/2289.full.pdf').focus();
+ 					window.open('https://www.pnas.org/doi/full/10.1073/pnas.0812506106').focus();
 						}
 				</script>
 				<p>
 			    Xu, Qikai, et al. "Design of 240,000 orthogonal 25mer DNA barcode probes." Proceedings of the National Academy of Sciences 106.7 (2009): 2289-2294.
-				</p>
-
-				<p>
-				<p class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" id="nucleic_acids_button">Nucleic Acids Research</p>
-				</p>
-				<script>
-				document.getElementById("nucleic_acids_button").onclick = function() {
- 					window.open('https://watermark.silverchair.com/gkaa572.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAsUwggLBBgkqhkiG9w0BBwagggKyMIICrgIBADCCAqcGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMp-ATZN5I3oJZ12knAgEQgIICeAiocuwDxK7MBgYZ7n5sz-NQsPmF1NBv1JOqkSJCnGvIAKMWcUwIkkdJwy-HrYfESp1BJad3_RGdOfXbY1_5gWxHM0HPkb0ZejbDQXqKGSmth8Z8BG9VKsIOMS-BDRnj4rn-PpiyBQyPlTeU94wiPtOFdlq2WH7mxv_3iA_dp0cC8fooK_Mi5FGgciiSEZ7Zlseh2pluryZpH_lanD95BExK6EqU6QJjAS7Dp5vNbNdcg-onJ_knDgRIYV-IX8tZ8c4feDpxctvUiePJyIT6eDomx3AzNQ_56UWufeDaqrJ4-rFDUGgm3GMmXV8SAbLOuRXNyIn7ycE5SgMABYh50_WgegGrSYxIf0dRb3uiysGjRLTEHiU3OvMBloChI9wse7yd9-ogk6XKErozegRjjO5stmCp5gM5VKez3V8h443fDmgmKjuhUZvBt9Mk0ynZVA1ZTjFc3Oxk45jiAJpJaE76hEUICb1CMnvkwOCkzHEPgk_AnTaU_Sa_LWIcTAeSBjnMP-jSP4-QwB2e7l4za7bjUDEWOjc0uXsiE_eisv0WqaQr4JgC5Ap2pLsoxVOpnviw3qB3H25GguN5KF6N_PjLLItTn7iiKrkEec75h1uOUGf2s4kMtBlEa8069RKznOdxYEz1sjRcKZYmRDEGY3Xrauk1qsx1gnXM1Ex5_nC4Y3pb9a60n-5N6u8jAPHKxyek0ICJDLAtDsqXTkc3pKa_bMLscglaqIQ6ok4IiNrrE5-M8poGE8ghBfn3IPGfrVF3-qf1ff2fkiHUG9IJ2ZZMk-5a51oRWv8Uj4bRuON3deo5JBgFIeEcc6caG39WAj0a0gMNJjp6').focus();
-						}
-				</script>
-				<p>
-				Banerjee, Dipanwita, et al. "Improved nearest-neighbor parameters for the stability of RNA/DNA hybrids under a physiological condition." Nucleic acids research 48.21 (2020): 12042-12054.
 				</p>
 			  </div>
 			</div>
