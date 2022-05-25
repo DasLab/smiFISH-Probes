@@ -96,7 +96,7 @@
 		  </label>
 		<div class="hidden inline-flex" id="CUSTOM_FLAP_div">
 	      <input type="text" id="CUSTOM_FLAP_Sequence" class="box-content w-50 shadow-sm space-x-2 px-2 border-2 border-gray-400 rounded-l-md focus:border-indigo-500 block text-sm" placeholder="Enter custom FLAP seq.">
-		    <button type="CUSTOM_FLAP_Button" class="-ml-px relative inline-flex items-center space-x-1 px-1 border border-gray-400 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block">
+		    <button type="CUSTOM_FLAP_Button" class="-ml-px relative inline-flex items-center space-x-1 px-1 border border-gray-400 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block" onclick='Custom_FLAP()'>
 		      <span>Enter</span>
 		      </button>
 		  </div>
@@ -110,7 +110,7 @@
   <legend class="sr-only">Status</legend>
 	  <div class="relative flex items-start">
 	    <div class="flex items-center h-5">
-			<svg id="status_FLAP_sequence" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			<svg id="status_FLAP_sequence" xmlns="http://www.w3.org/2000/svg" class="opacity-25 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 			  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
 			</svg>
 	    </div>
@@ -143,6 +143,27 @@
 	    </div>
 	  </div>
 	</fieldset>
+
+	<!-- Function to check if tasks are complete (checklist on right hand side of page)
+	<script>
+		const FLAPName = document.querySelector('#FLAPNameBox')
+		FLAPName.addEventListener('input', () => {
+			$('#status_FLAP_sequence').removeClass('opacity-25');
+		});
+		const TargetName = document.querySelector('#target_name')
+		TargetName.addEventListener('input', function (evt) {
+			$('#status_target_name').removeClass('opacity-25');
+		});
+	</script> -->
+
+	<!-- Function to enter custom FLAP sequence -->
+	<script>
+		function Custom_FLAP() {
+			var custom_seq = document.getElementById('CUSTOM_FLAP_Sequence').value;
+			var FLAP_seq_box = document.getElementById('FLAPSequenceBox');
+			FLAP_seq_box += custom_seq;
+		}
+	</script>
 
 
 	<div class="col-start-1 col-end-3">

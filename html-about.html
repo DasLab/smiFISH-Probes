@@ -75,25 +75,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
-      <div class="pt-2 pb-3 space-y-1">
-        <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" -->
-        <a href="#" class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium" aria-current="page">
-          RNA Probe-ono
-        </a>
-
-        <a href="#" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-          Team
-        </a>
-
-        <a href="#" class="border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
-          Projects
-        </a>
-
-      </div>
-    </div>
   </nav>
 
   <div class="py-10">
@@ -108,7 +89,10 @@
 	  <div class="col-start-1 col-end-5 row-start-1 pl-8">
 	  	<div class="shadow bg-gray-150 px-4 py-5 sm:p-6">
 	  		<div class="bg-red-100 border-b-4 border-red-200">
-	  		<h>&#10067; About RNA Probe-ono</h>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+	  		<h>About RNA Probe-ono</h>
 	  		</div>
 				<p class="inline">RNA Probe-ono is a locally-run website that utilizes Pyodide to run a Python script that automatically generates probes for single-molecule inexpensive RNA fluorescent <i>in situ</i> hybridization <p class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" id="smiFISH_button">(smiFISH)</p> experiments. The Python script, developed by the Das Lab at Stanford University, takes an inputted RNA sequence and outputs an excel file of probes ready to be uploaded to online DNA ordering systems. The Python software and locally-run website help remove the problematic task of probe generation and allow the general science community to conduct single-molecule RNA detection experiments.</p>
 	  		</div>
@@ -120,8 +104,11 @@
 	  	</div>
 	  <div class="pr-8 col-start-5 col-end-7 row-start-1">
 	  	<div class="shadow bg-gray-150 py-5 sm:p-6">
-	  	<div class="bg-green-100 border-b-4 border-green-200 ">
-			<h class="text-lg">&#128172; Contact</h>
+	  	<div class="bg-green-100 border-b-4 border-green-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+			<h class="text-lg">Contact</h>
 		</div>
 			<div class="grid grid-cols-2 text-center">
 				<div class="col-start-1">
@@ -167,7 +154,10 @@
 			  <div class="shadow bg-gray-150 py-5 sm:p-6">
 			    <!-- Content goes here -->
 			    <div class="bg-blue-100 border-b-4 border-blue-200 ">
-			    <h class="text-lg">&#128214; Citations</h>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+			    <h class="text-lg">Citations</h>
 				</div>
 			    <p>
 			    <p class="font-bold hover:text-blue-600 focus:outline-none inline text-center inline" id="PNAS_button">PNAS</p>
@@ -200,7 +190,10 @@
 			  <div class="shadow bg-gray-150 py-5 sm:p-6">
 			    <!-- Content goes here -->
 			    <div class="bg-purple-100 border-b-4 border-purple-200 ">
-			    <h class="text-lg">&#128193; History</h>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+            </svg>
+			    <h class="text-lg">History</h>
 			  </div>
           <p>
             <i>November 2021</i> - RNA Probe-ono created &#127882;
