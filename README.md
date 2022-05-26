@@ -2,10 +2,10 @@
 
 TODOs:
 
-- Implement loading progress bar for probe generation (https://tailwindui.com/components/application-ui/navigation/steps)
+- Implemented loading progress bar for probe generation, but animation ends abruptly (https://tailwindui.com/components/application-ui/navigation/steps)
 - Implement styled run summary
-- Flesh out code/protocol sections (add history to about page)
-- Fix FLAP sequence radio button (take custom FLAP input when radio button selected, pop up error when no radio option is selected)
+- Flesh out code section
+- Fix custom FLAP sequence option. Transfer inputted sequence into python code, show errors when other letters/symbols are used.
 - Fix styling for tables (https://tailwindui.com/components/application-ui/lists/tables)
 
 - If possible, abstract away pieces of HTML and JS
