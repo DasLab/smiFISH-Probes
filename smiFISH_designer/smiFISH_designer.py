@@ -27,9 +27,9 @@ def main(fasta, config, output):
 		target_sequence = parser['REQUIRED']['TargetSequence']
 
 		min_probe_number = int(parser['OPTIONAL']['MinProbeNumber'])
-		probe_min = parser['OPTIONAL']['ProbeMinLength']
-		probe_max = parser['OPTIONAL']['ProbeMaxLength']
-		AcceptableProbeMax = parser['OPTIONAL']['TotalProbeMaxLength']
+		probe_min = parser['OPTIONAL']['ProbeMin']
+		probe_max = parser['OPTIONAL']['ProbeMax']
+		AcceptableProbeMax = parser['OPTIONAL']['AcceptableProbeMax']
 		FLAP_name = parser['OPTIONAL']['FLAPName']
 		FLAP_sequence = parser['OPTIONAL']['FLAPSequence']
 
