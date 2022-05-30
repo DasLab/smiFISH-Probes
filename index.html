@@ -41,6 +41,42 @@
     </div>
   </nav>
 
+<div id="betabanner" class="relative bg-indigo-600">
+  <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+    <div class="pr-16 sm:text-center sm:px-16">
+      <p class="font-medium text-white">
+        <span class="md:hidden"> Beta announcement </span>
+        <span class="hidden md:inline"> RNA Probe-ono is in Beta! </span>
+      </p>
+    </div>
+    <div class="absolute inset-y-0 right-0 pt-1 pr-1 flex items-start sm:pt-1 sm:pr-2 sm:items-start">
+      <button type="button" class="close flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white">
+        <span class="sr-only">Dismiss</span>
+        <!-- Heroicon name: outline/x -->
+        <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- script to close Beta banner -->
+<script>
+	// Get all elements with class="close"
+	var closebtns = document.getElementsByClassName("close");
+	var closebetabanner = document.getElementById("betabanner");
+	var i;
+
+	// Loop through the elements, and hide the parent, when clicked on
+	for (i = 0; i < closebtns.length; i++) {
+	  closebtns[i].addEventListener("click", function() {
+	    this.parentElement.style.display = 'none';
+	    closebetabanner.style.display = 'none';
+	  });
+	}
+</script>
+
   <div class="pt-10 pb-6">
     <header>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -197,7 +233,7 @@
 
 <div class="col-start-1 col-end-3 w-1/2 justify-left">
   <label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
-  <input type="text" id="target_name" class="shadow-sm border-2 border-gray-400 rounded-md focus:ring-indigo-500 focus:border-indigo-500 block w-full" value="MPB"/>
+  <input type="text" id="target_name" class="shadow-sm border-2 border-gray-400 rounded-md focus:ring-indigo-500 focus:border-indigo-500 block w-full" value="Mbp"/>
 </div>
 
 <div class="col-start-1 col-end-6">
@@ -372,13 +408,15 @@
 
 
     let python = `
-    import pandas as pd
-    import numpy as np
-    import js
-    
+import pandas as pd
+import numpy as np
+import js as js
     `;
 
     let probe_design_python = `
+    import pandas as pd
+    import numpy as np
+    import js as js
 
     # Import information from form
     target_sequence = js.document.getElementById("target_sequence").value
@@ -715,13 +753,13 @@
 				console.log(dataframe_html)
 
 
-                  document.getElementById('download-csv-button').onclick = function() {
+/*                  document.getElementById('download-csv-button').onclick = function() {
                     console.log('CSV button pressed')
                     console.log(pyodide.runPython(dataframe_py_to_csv))
                     document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
-                    var csv_text = document.getEementById('hidden_csv_output').textContent;
+                    var csv_text = document.getEementById('hidden_csv_output').textContent
                     download('RNAProbeono.csv', csv_text)
-                  }
+                  }*/
 
        }
      
@@ -731,7 +769,7 @@
            console.log(pyodide.runPython(dataframe_py_to_csv))
            document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
            var csv_text = document.getElementById('hidden_csv_output').textContent;
-           download('filename.csv', csv_text)
+           download('RNAProbeono.csv', csv_text)
 
          }
      }
