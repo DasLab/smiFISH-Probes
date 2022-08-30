@@ -130,7 +130,7 @@
 		      <span class="ml-2">Custom</span>
 		  </label>
 		<div class="hidden inline-flex" id="CUSTOM_FLAP_div">
-	      <input type="text" id="CUSTOM_FLAP_Sequence" class="box-content w-50 shadow-sm space-x-2 px-2 border-2 border-gray-400 rounded-l-md focus:border-indigo-500 block text-sm" placeholder="Enter custom FLAP seq.">
+	      <input type="text" id="custom_FLAP_Sequence" class="box-content w-50 shadow-sm space-x-2 px-2 border-2 border-gray-400 rounded-l-md focus:border-indigo-500 block text-sm" placeholder="Enter custom FLAP seq." oninput='validate_custom_FLAP()'>
 		    <button type="CUSTOM_FLAP_Button" class="-ml-px relative inline-flex items-center space-x-1 px-1 border border-gray-400 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block" onclick='Custom_FLAP()'>
 		      <span>Enter</span>
 		      </button>
@@ -138,7 +138,53 @@
 		</div>
 	  </div>
 	</div>
+		<div role="alert" class='hidden border border-red-400 rounded-md bg-red-100 px-4 py-3 text-red-700 my-2' id="custom_FLAP_errors">
+    	<p>Something not ideal might be happening.</p>
+  		</div>
 	</div>
+
+  	<!-- Error box for custom FLAP sequence -->
+	<script>
+		function validate_custom_FLAP() {
+			$('#custom_FLAP_errors').empty();
+
+        	errors = []
+
+        	custom_FLAP_Sequence = document.getElementById('custom_FLAP_Sequence').value;
+
+        // Check FLAP base content
+        if(!base_check_FLAP(custom_FLAP_Sequence)){
+          errors.push('Invalid characters detected. Custom FLAP sequence must only contain A/T/C/G');
+        }
+
+        if(errors.length > 0){
+         $('#custom_FLAP_errors').removeClass('hidden')
+
+          errors.forEach(element => {
+            $('#custom_FLAP_errors').append('<p>' + element + '<p>');
+          });
+        } else {
+          $('#custom_FLAP_errors').addClass('hidden');
+        }
+        console.log(errors);
+       }
+
+		     function base_check_FLAP(custom_FLAP_Sequence)
+					  {
+					   var letters = /^[AGCTagct]+$/;
+					   if(String(custom_FLAP_Sequence).match(letters))
+					     {
+					      return true;
+					     }
+					   else
+					     {
+					      return false;
+					     }
+					  }
+
+					console.log(base_check_FLAP(custom_FLAP_Sequence))
+
+	</script>
 
 <!-- Status bar that tells user what tasks are done and what still needs to be completed -->
 <fieldset class="col-start-5 col-end-7">
@@ -196,7 +242,7 @@
 	<!-- Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)-->
 	<script>
 		function Custom_FLAP() {
-			var custom_seq = document.getElementById('CUSTOM_FLAP_Sequence').value;
+			var custom_seq = document.getElementById('custom_FLAP_Sequence').value;
 			var FLAP_seq_box = document.getElementById('FLAPSequenceBox');
 			FLAP_seq_box += custom_seq;
 		}
@@ -242,7 +288,7 @@
 
 <div class="col-start-1 col-end-6">
   <label for="target sequence" class="block text-sm font-medium text-gray-700">Target RNA Sequence:</label>
-    <textarea type="text" id="target_sequence" rows="3" class="px-1 resize-y border-2 border-gray-400 rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="AAAGACAGGCCCUCAGAGUCCG..." oninput="validate_target_sequence();" onclick="seq_input_added(status_target_sequence)"></textarea>
+    <textarea type="text" id="target_sequence" rows="3" class="px-1 resize-y border-2 border-gray-400 rounded-md hadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="AAAGACAGGCCCUCAGAGUCCG..." oninput="validate_target_sequence()" onclick="seq_input_added(status_target_sequence)"></textarea>
     <div class='block text-sm font-medium text-gray-700 text-right'>
     <span id="TotalNumberofCharacters"></span>
     <span> / </span>
@@ -258,7 +304,7 @@
 
 		<div class="col-start-1 col-end-5">
 			<button type="button" class="inline-flex items-center ml-8 px-3 py-2 w-1/4 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-t-md text-white bg-indigo-600 hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="accordion_open">
-				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
 				</svg>
 			  Additional design parameters
@@ -339,7 +385,7 @@
 			function calculate_min_target_size(probemax, numberprobes) {
 		        var ProbeMaxBox = document.getElementById('probemax').value; 
 		        var NumberofProbesBox = document.getElementById('numberprobes').value;
-		        var MinCharacterTotal = document.getElementById('MinCharacterTotalBox'); 
+		        var MinCharacterTotal = document.getElementById('MinCharacterTotalBox');
 		        var myResult = ProbeMaxBox * NumberofProbesBox;
 		        	document.getElementById('MinCharacterTotalBox').innerHTML = myResult;
 		        return myResult;
@@ -368,14 +414,14 @@
     	<div></div>
     	<div class='pt-4'>
 	        <button id="make-probe-button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-8">
-	        	<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+	        	<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
 				</svg>
 	        Make Probes!</button>
 
 	        <button type="button" id="download-csv-button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 	        <!-- Heroicon name: solid/mail -->
-			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 			</svg>
 	        Download CSV File
