@@ -151,6 +151,7 @@
         	errors = []
 
         	custom_FLAP_Sequence = document.getElementById('custom_FLAP_Sequence').value;
+        	FLAPName = document.getElementById('FLAPNameBox').value;
 
         // Check FLAP base content
         if(!base_check_FLAP(custom_FLAP_Sequence)){
@@ -163,26 +164,60 @@
           errors.forEach(element => {
             $('#custom_FLAP_errors').append('<p>' + element + '<p>');
           });
+
+        } else if(FLAPName != 'Custom FLAP') {
+        	$('#custom_FLAP_errors').addClass('hidden');
+
         } else {
           $('#custom_FLAP_errors').addClass('hidden');
         }
         console.log(errors);
        }
 
-		     function base_check_FLAP(custom_FLAP_Sequence)
-					  {
-					   var letters = /^[AGCTagct]+$/;
-					   if(String(custom_FLAP_Sequence).match(letters))
-					     {
-					      return true;
+		
+		function base_check_FLAP(custom_FLAP_Sequence)
+			{
+				var letters = /^[AGCTagct]+$/;
+				if(String(custom_FLAP_Sequence).match(letters))
+					{
+					return true;
 					     }
-					   else
+				else
 					     {
-					      return false;
+					return false;
 					     }
 					  }
 
-					console.log(base_check_FLAP(custom_FLAP_Sequence))
+			console.log(base_check_FLAP(custom_FLAP_Sequence))
+		
+		// Function to take selected FLAP name and sequence from radio into input boxes found within the status bar 
+			function radio_input() {
+				var radios = document.getElementsByName('radio');
+
+				for (var i = 0, length = radios.length; i < length; i++) {
+ 					if (radios[i].checked) {
+    					var FLAPName = radios[i].id;
+    					var FLAPSequence = radios[i].value;
+    				console.log(radios[i].value);
+    				}
+    				if (FLAPName === 'Custom FLAP') {
+    					$('#CUSTOM_FLAP_div').removeClass('hidden');
+    				}
+    				else {
+         				$('#CUSTOM_FLAP_div').addClass('hidden');
+        			}
+
+    			document.getElementById('FLAPNameBox').value = FLAPName
+				document.getElementById('FLAPSequenceBox').value = FLAPSequence
+    				}
+    			}
+
+    	// Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)
+ 		function Custom_FLAP() {
+			var custom_seq = document.getElementById('custom_FLAP_Sequence').value;
+			var FLAP_seq_box = document.getElementById('FLAPSequenceBox');
+			FLAP_seq_box += custom_seq;
+		}
 
 	</script>
 
@@ -238,45 +273,6 @@
 
 	</script>
 
-
-	<!-- Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)-->
-	<script>
-		function Custom_FLAP() {
-			var custom_seq = document.getElementById('custom_FLAP_Sequence').value;
-			var FLAP_seq_box = document.getElementById('FLAPSequenceBox');
-			FLAP_seq_box += custom_seq;
-		}
-	</script>
-
-
-	<div class="col-start-1 col-end-3">
-	<div role="alert" class='hidden border border-red-400 rounded-md rounded-b bg-red-100 px-4 py-3 text-red-700' id="FLAP_radio_errors">
-    <p>Something not ideal might be happening with the FLAP radio.</p>
-  	</div>
-   </div>
-   		<!--Function to take selected FLAP name and sequence from radio into input boxes found within the status bar -->
-		<script> 
-			function radio_input() {
-				var radios = document.getElementsByName('radio');
-
-				for (var i = 0, length = radios.length; i < length; i++) {
- 					if (radios[i].checked) {
-    					var FLAPName = radios[i].id;
-    					var FLAPSequence = radios[i].value;
-    				console.log(radios[i].value);
-    				}
-    				if (FLAPName === 'Custom FLAP') {
-    					$('#CUSTOM_FLAP_div').removeClass('hidden');
-    				}
-    				else {
-         				$('#CUSTOM_FLAP_div').addClass('hidden');
-        			}
-
-    			document.getElementById('FLAPNameBox').value = FLAPName
-				document.getElementById('FLAPSequenceBox').value = FLAPSequence
-    				}
-    			}
-		</script>
 
 <div class="col-start-1 col-end-3 w-1/2 justify-left">
   <label for="target name" class="block text-sm font-medium text-gray-700">Name of Target RNA Sequence:</label>
