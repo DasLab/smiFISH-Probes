@@ -97,7 +97,7 @@
     <div class="grid grid-cols-6 gap-2 ml-8">
  <!-- Radio box for FLAP seuqence, including custom FLAP sequence input -->
    	<span class="block text-sm font-medium text-gray-700">FLAP sequence:</span>
-    <div id="radio div" class="block col-start-1 col-end-4" oninput="radio_input();">
+    <div id="radio div" class="block col-start-1 col-end-4" oninput="radio_input();" onclick='custom_FLAP_clicked_check()'>
     <div class="shadow bg-gray-150 pl-6 pt-2 pb-2 border-2 rounded-md">
 	  <div class="mt-2">
 	    <div>
@@ -141,6 +141,7 @@
 		<div role="alert" class='hidden border border-red-400 rounded-md bg-red-100 px-4 py-3 text-red-700 my-2' id="custom_FLAP_errors">
     	<p>Something not ideal might be happening.</p>
   		</div>
+  		<input class='hidden text-gray-500 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md w-48' id='custom_FLAP_box'>
 	</div>
 
   	<!-- Error box for custom FLAP sequence -->
@@ -165,20 +166,22 @@
             $('#custom_FLAP_errors').append('<p>' + element + '<p>');
           });
 
-        } else if(FLAPName != 'Custom FLAP') {
-        	$('#custom_FLAP_errors').addClass('hidden');
-
         } else {
           $('#custom_FLAP_errors').addClass('hidden');
         }
         console.log(errors);
+        document.getElementById('custom_FLAP_box').value = errors
+
        }
 
-		
 		function base_check_FLAP(custom_FLAP_Sequence)
 			{
 				var letters = /^[AGCTagct]+$/;
 				if(String(custom_FLAP_Sequence).match(letters))
+					{
+					return true;
+					     }
+				if(String(custom_FLAP_Sequence).length === 0)
 					{
 					return true;
 					     }
@@ -189,8 +192,34 @@
 					  }
 
 			console.log(base_check_FLAP(custom_FLAP_Sequence))
+
+
+    	//Function to hide custom FLAP sequence error box if custom FLAP sequence isn't selected on radio
+    	function custom_FLAP_clicked_check() {
+    		var radios = document.getElementsByName('radio');
+    		var ErrorBox = document.getElementById('custom_FLAP_box');
+    		var ErrorBoxValue = document.getElementById('custom_FLAP_box').value;
+
+    		for (var i = 0, length = radios.length; i < length; i++) {
+ 					if (radios[i].checked) {
+    					var FLAPName = radios[i].id;
+    				}
+    				if (FLAPName != 'Custom FLAP') {
+    					$('#custom_FLAP_errors').addClass('hidden');
+    						}
+    				if (ErrorBox != ErrorBoxValue) 
+    				{
+    					$('#custom_FLAP_errors').addClass('hidden');
+    				}
+    				else
+    				{
+    					$('#custom_FLAP_errors').removeClass('hidden')
+    				}
+    			}}
+
 		
-		// Function to take selected FLAP name and sequence from radio into input boxes found within the status bar 
+		
+		// Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)
 			function radio_input() {
 				var radios = document.getElementsByName('radio');
 
@@ -212,7 +241,8 @@
     				}
     			}
 
-    	// Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)
+
+    	// Function to take selected FLAP name and sequence from radio into input boxes found within the status bar 
  		function Custom_FLAP() {
 			var custom_seq = document.getElementById('custom_FLAP_Sequence').value;
 			var FLAP_seq_box = document.getElementById('FLAPSequenceBox');
