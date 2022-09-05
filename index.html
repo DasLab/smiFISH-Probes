@@ -465,7 +465,13 @@
       </span>
     </div>
 
-    <!-- Progress bar -->
+	<!-- Error for 'Make Probes' button. Checks if all inputted data is there and correct -->
+		<div role="alert" class='hidden border border-red-400 rounded-md bg-red-100 px-4 py-3 text-red-700 my-2' id="make_probes_errors">
+    	<p>Something not ideal might be happening.</p>
+  		</div>
+
+
+    <!-- Progress bar animation -->
 	<div role='alert' class="hidden pl-8 pr-8" id='status_bar_div'>
 	  <h4 class="sr-only">Status</h4>
 	  <div class="mt-6" aria-hidden="true">
@@ -811,10 +817,45 @@ import js as js
 
       document.getElementById('make-probe-button').onclick = function() {
 
+// Trying to make error box for make probes button. Ignores all errors and continues to show animation. 
+     //    $('#make_probes_errors').empty();
+
+     //    errors = []
           
-          console.log('Make Probes button pressed');
+     //      console.log('Make Probes button pressed');
+     //      var check_sequence = document.getElementById('target_sequence').length;
+     //      var check_name = document.getElementById('target_name').length;
+     //      var check_FLAP = document.getElementById('FLAPNameBox').value;
+     //      var check_FLAP_custom = document.getElementById('custom_FLAP_Sequence').length;
+     //      var MinCharacterTotal = document.getElementById('MinCharacterTotalBox').value;
 
 
+     //    // First, check to make sure we have a target sequence
+     //    if(check_sequence > MinCharacterTotal){
+     //     errors.push('Target sequence not long enough for desired number of probes.')
+     //    }
+
+     //    // Check Target name
+     //    else if(check_name > 0){
+     //      errors.push('No target name inputted. Please input name before making probes.')
+     //    }
+
+     //    // Checking if custom FLAP sequence has input
+     //    else if(check_FLAP != 'Custom FLAP') {
+    	// 	if(check_FLAP_custom <= 0){
+    	// 		errors.push('Custom FLAP sequence selected and no custom FLAP sequence inputted. Please input custom FLAP sequence in the input box in FLAP sequence section.');
+    	// 	}	
+    	// }
+
+    	// if(errors.length > 0){
+     //      $('#make_probes_errors').removeClass('hidden')
+
+     //      errors.forEach(element => {
+     //        $('#make_probes_errors').append('<p>' + element + '<p>');
+     //      });
+     //  	}
+
+    	// else{
 		    	// Animation for progress bar
 	        	let progress = 0;
 	        	let invervalSpeed = 30;
@@ -837,6 +878,7 @@ import js as js
 				var dataframe_html = pyodide.runPython(dataframe_py_to_html)
 				document.getElementById('output').innerHTML = dataframe_html
 				console.log(dataframe_html)
+		}
 
 
 /*                  document.getElementById('download-csv-button').onclick = function() {
@@ -858,7 +900,7 @@ import js as js
            download('RNAProbeono.csv', csv_text)
 
          }
-     }
+    
           
         // TODO: Consider deleting this
         // function edit_df() {
