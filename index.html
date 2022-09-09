@@ -4,7 +4,7 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
 
 <meta charset="UTF-8">
@@ -130,7 +130,7 @@
 		      <span class="ml-2">Custom</span>
 		  </label>
 		<div class="hidden inline-flex" id="CUSTOM_FLAP_div">
-	      <input type="text" id="custom_FLAP_Sequence" class="box-content w-50 shadow-sm space-x-2 px-2 border-2 border-gray-400 rounded-l-md focus:border-indigo-500 block text-sm" placeholder="Enter custom FLAP seq." oninput='validate_custom_FLAP()'>
+	      <input type="text" id="custom_FLAP_Sequence" class="uppercase box-content w-50 shadow-sm space-x-2 px-2 border-2 border-gray-400 rounded-l-md focus:border-indigo-500 block text-sm" placeholder="Enter custom FLAP seq.">
 		    <button type="CUSTOM_FLAP_Button" class="-ml-px relative inline-flex items-center space-x-1 px-1 border border-gray-400 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:ring-indigo-500 focus:border-indigo-500 block" onclick='Custom_FLAP()'>
 		      <span>Enter</span>
 		      </button>
@@ -146,6 +146,44 @@
 
   	<!-- Error box for custom FLAP sequence -->
 	<script>
+		const element = document.getElementById('custom_FLAP_Sequence');
+		element.addEventListener("input", validate_custom_FLAP);
+
+		
+		// Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)
+			function radio_input() {
+				var radios = document.getElementsByName('radio');
+
+				for (var i = 0, length = radios.length; i < length; i++) {
+ 					if (radios[i].checked) {
+    					var FLAPName = radios[i].id;
+    					var FLAPSequence = radios[i].value;
+    				console.log(radios[i].value);
+    				}
+    				if (FLAPName === 'Custom FLAP') {
+    					$('#CUSTOM_FLAP_div').removeClass('hidden');
+
+    				}
+    				else {
+         				$('#CUSTOM_FLAP_div').addClass('hidden');
+        			}
+
+    			document.getElementById('FLAPNameBox').value = FLAPName
+				document.getElementById('FLAPSequenceBox').value = FLAPSequence
+    				}
+    			}
+
+    	// Function to take selected FLAP name and sequence from radio into input boxes found within the status bar. Onclick, takes inputted Custom FLAP value and assigns it to the Custom FLAP radio value, then copies it from the radio value to FLAPSequenceBox
+ 		function Custom_FLAP() {
+			var custom_seq = document.getElementById('custom_FLAP_Sequence').value;
+			var button = document.getElementById('Custom FLAP').value;
+			button = custom_seq;
+			document.getElementById('FLAPSequenceBox').value = button;
+			}
+
+
+	// Functions for FLAP Sequence Errors
+		// Error list for custom FLAP sequence input box
 		function validate_custom_FLAP() {
 			$('#custom_FLAP_errors').empty();
 
@@ -217,38 +255,6 @@
     				}
     			}}
 
-		
-		
-		// Function to enter custom FLAP sequence (opens custom FLAP sequence box for input)
-			function radio_input() {
-				var radios = document.getElementsByName('radio');
-
-				for (var i = 0, length = radios.length; i < length; i++) {
- 					if (radios[i].checked) {
-    					var FLAPName = radios[i].id;
-    					var FLAPSequence = radios[i].value;
-    				console.log(radios[i].value);
-    				}
-    				if (FLAPName === 'Custom FLAP') {
-    					$('#CUSTOM_FLAP_div').removeClass('hidden');
-    				}
-    				else {
-         				$('#CUSTOM_FLAP_div').addClass('hidden');
-        			}
-
-    			document.getElementById('FLAPNameBox').value = FLAPName
-				document.getElementById('FLAPSequenceBox').value = FLAPSequence
-    				}
-    			}
-
-
-    	// Function to take selected FLAP name and sequence from radio into input boxes found within the status bar 
- 		function Custom_FLAP() {
-			var custom_seq = document.getElementById('custom_FLAP_Sequence').value;
-			var FLAP_seq_box = document.getElementById('FLAPSequenceBox');
-			FLAP_seq_box += custom_seq;
-		}
-
 	</script>
 
 <!-- Status bar that tells user what tasks are done and what still needs to be completed -->
@@ -265,7 +271,7 @@
 	      <p id="comments-description" class="text-gray-500">FLAP name:</p>
 	      <input type="text" id="FLAPNameBox" class="text-gray-500 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="FLAP X" disabled/>
 	      <p id="comments-description" class="text-gray-500">FLAP sequence:</p>
-	      <input type="text" id="FLAPSequenceBox" class="text-gray-500 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md w-48" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" disabled/>
+	      <input type="text" id="FLAPSequenceBox" class="uppercase text-gray-500 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md w-48" value="CCTCCTAAGTTTCGAGCTGGACTCAGTG" disabled/>
 	    </div>
 	  </div>
 	  <div class="relative flex items-start">
