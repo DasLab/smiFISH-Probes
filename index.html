@@ -3,7 +3,7 @@
   <head>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.19.0/full/pyodide.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   </head>
 
@@ -499,7 +499,7 @@
     // init Pyodide
     async function main() {
       let pyodide = await loadPyodide({
-        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.0/full/",
+        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.19.0/full/",
       });
       return pyodide;
     }
@@ -785,19 +785,6 @@ import js as js
     fdf.to_excel()
     `;
 
-    //URL: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
-    function download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
-    }
 
     async function evaluatePython() {
       // try {
@@ -829,12 +816,11 @@ import js as js
      //    errors = []
           
      //      console.log('Make Probes button pressed');
-     //      var check_sequence = document.getElementById('target_sequence').length;
+     //      var check_sequence = document.getElementById('target_sequence');
      //      var check_name = document.getElementById('target_name').length;
      //      var check_FLAP = document.getElementById('FLAPNameBox').value;
      //      var check_FLAP_custom = document.getElementById('custom_FLAP_Sequence').length;
      //      var MinCharacterTotal = document.getElementById('MinCharacterTotalBox').value;
-
 
      //    // First, check to make sure we have a target sequence
      //    if(check_sequence > MinCharacterTotal){
@@ -842,12 +828,12 @@ import js as js
      //    }
 
      //    // Check Target name
-     //    else if(check_name > 0){
+     //    if(check_name > 0){
      //      errors.push('No target name inputted. Please input name before making probes.')
      //    }
 
      //    // Checking if custom FLAP sequence has input
-     //    else if(check_FLAP != 'Custom FLAP') {
+     //    if(check_FLAP != 'Custom FLAP') {
     	// 	if(check_FLAP_custom <= 0){
     	// 		errors.push('Custom FLAP sequence selected and no custom FLAP sequence inputted. Please input custom FLAP sequence in the input box in FLAP sequence section.');
     	// 	}	
@@ -883,29 +869,34 @@ import js as js
 				console.log(pyodide.runPython(probe_design_python))
 				var dataframe_html = pyodide.runPython(dataframe_py_to_html)
 				document.getElementById('output').innerHTML = dataframe_html
-				console.log(dataframe_html)
 		}
 
-
-/*                  document.getElementById('download-csv-button').onclick = function() {
+		// Function to download CSV file of probe dataframe
+                document.getElementById('download-csv-button').onclick = function() {
                     console.log('CSV button pressed')
                     console.log(pyodide.runPython(dataframe_py_to_csv))
                     document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
-                    var csv_text = document.getEementById('hidden_csv_output').textContent
+                    var csv_text = document.getElementById('hidden_csv_output').textContent
                     download('RNAProbeono.csv', csv_text)
-                  }*/
+                  }
 
        }
      
 
-    document.getElementById('download-csv-button').onclick = function() {
-           console.log('CSV button pressed')
-           console.log(pyodide.runPython(dataframe_py_to_csv))
-           document.getElementById('hidden_csv_output').innerHTML = pyodide.runPython(dataframe_py_to_csv)
-           var csv_text = document.getElementById('hidden_csv_output').textContent;
-           download('RNAProbeono.csv', csv_text)
+// Download function for CSV file
+    //URL: https://ourcodeworld.com/articles/read/189/how-to-create-a-file-and-generate-a-download-with-javascript-in-the-browser-without-a-server
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
 
-         }
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
     
           
         // TODO: Consider deleting this
@@ -917,9 +908,6 @@ import js as js
         //   return edited
         // }
         
-
-
-
       
   
     evaluatePython();
